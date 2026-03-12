@@ -59,8 +59,8 @@
         "back": "To find a specfic property of all subarrays of length K."
       },
       {
-        "text": "In a dynamically-sized sliding window we {{c1::expand the window while the condition is valid}} and {{c2::shrink the window until the condition becomes valid again}}.",
-        "extra": ""
+        "front": "In a dynamically-sized sliding window when do we expand and when do we shrink the window?",
+        "back": "We expand the window while the condition is valid and shrink the window until the condition becomes valid again."
       },
       {
         "front": "What are 4 efficient ways to track state in a sliding window, and when should each be used?",

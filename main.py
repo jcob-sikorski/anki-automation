@@ -5,14 +5,13 @@ import questionary
 
 ANKI_CONNECT_URL = "http://localhost:8765"
 DECK_NAME = "LeetCode Patterns"
-BASIC_MODEL = "Basic"
-CLOZE_MODEL = "Cloze"
+MODEL_NAME = "Basic"
 JSON_FOLDER = "json"
 
 
-def add_note(front, back=None, tags=None, cloze=False):
-    model_name = CLOZE_MODEL if cloze else BASIC_MODEL
-    fields = {"Front": front, "Back": back} if not cloze else {"Text": front, "Extra": back or ""}
+def add_note(front, back, tags=None):
+    if tags is None:
+        tags = ["leetcode", "patterns"]
 
     payload = {
         "action": "addNote",
@@ -20,49 +19,66 @@ def add_note(front, back=None, tags=None, cloze=False):
         "params": {
             "note": {
                 "deckName": DECK_NAME,
-                "modelName": model_name,
-                "fields": fields,
-                "tags": tags or []
+                "modelName": MODEL_NAME,
+                "fields": {
+                    "Front": front,
+                    "Back": back
+                },
+                "tags": tags
             }
         }
     }
 
     response = requests.post(ANKI_CONNECT_URL, json=payload).json()
+
     if response.get("error"):
         print("Error:", response["error"])
     else:
-        print("Added card:", front[:50] + ("..." if len(front) > 50 else ""))
+        # Truncate the printed output so massive questions don't flood the terminal
+        preview = front[:60] + "..." if len(front) > 60 else front
+        print("Added card:", preview)
 
 
 def import_cards_from_json(file_path):
-    with open(file_path, "r") as f:
-        groups = json.load(f)
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-    for group in groups:
-        group_tags = group.get("tags", [])
-        cards = group.get("cards", [])
-
-        for card in cards:
-            front = card.get("front") or card.get("text")
-            back = card.get("back") or card.get("extra")
-            if not front:
-                print("Skipping card with missing front/text:", card)
-                continue
-
-            cloze = "extra" in card
-            add_note(front, back, tags=group_tags, cloze=cloze)
+    # 1. Iterate through each group in the JSON array
+    for group in data:
+        # Extract the shared tags for this block
+        tags = group.get("tags", ["leetcode", "patterns"])
+        
+        # 2. Iterate through the "cards" list nested inside this group
+        for card in group.get("cards", []):
+            front = card.get("front")
+            back = card.get("back")
+            
+            if front and back:
+                add_note(front, back, tags)
+            else:
+                print("Skipped an invalid card missing a 'front' or 'back' field.")
 
 
 def choose_json_file():
+    if not os.path.exists(JSON_FOLDER):
+        print(f"Error: Folder '{JSON_FOLDER}' does not exist.")
+        exit()
+
     files = [f for f in os.listdir(JSON_FOLDER) if f.endswith(".json")]
+
     if not files:
-        print("No JSON files found in json/ folder.")
+        print(f"No JSON files found in {JSON_FOLDER}/ folder.")
         exit()
 
     selected = questionary.select(
         "Select a JSON file to import:",
         choices=files
     ).ask()
+
+    # Handle the user pressing Ctrl+C or exiting the prompt
+    if not selected:
+        print("Selection cancelled.")
+        exit()
 
     return os.path.join(JSON_FOLDER, selected)
 

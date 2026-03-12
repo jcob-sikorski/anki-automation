@@ -1,0 +1,63 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "opposite-pointers"
+    ],
+    "cards": [
+      {
+        "front": "In the opposite pointers (two pointers) technique, what are the two pointers we use? Where do they start, and what is their general behavior?",
+        "back": "We use a **left** pointer (starting at index 0) and a **right** pointer (starting at index n-1). They move toward each other based on a problem-specific condition until left >= right (they meet or cross)."
+      },
+      {
+        "front": "What is the two-sum pattern using opposite pointers?",
+        "back": "It finds (or returns indices of) two numbers in a sorted array that add up to a target by using left and right pointers that move inward. The sorted order lets us decide which pointer to move to adjust the sum efficiently (O(n) after sorting)."
+      },
+      {
+        "front": "What is the primary precondition for using the two-sum pattern with opposite pointers?",
+        "back": "The array must be sorted in non-decreasing order. Without this, the movement logic (increase sum → move left, decrease sum → move right) does not work."
+      },
+      {
+        "front": "How do you find a pair that sums to a target using opposite pointers? Describe the algorithm step by step.",
+        "back": "1. Sort the array (if not already sorted). 2. Set left = 0, right = n-1. 3. While left < right: compute sum = arr[left] + arr[right]. 4. If sum == target → return the pair (or indices). 5. If sum < target → left++. 6. If sum > target → right--. 7. If loop ends without finding a pair → no solution."
+      },
+      {
+        "front": "In the two-sum opposite pointers algorithm, what key conditions should you check in the loop?",
+        "back": "Main loop: while (left < right). Inside: compare current sum with target (three cases: equal, smaller, larger). Optionally skip duplicates if the problem asks for unique pairs."
+      },
+      {
+        "front": "What is the \"squeezing\" behavior in the opposite pointers technique? Which pointer do you move and based on what?",
+        "back": "Squeezing shrinks the search window by moving pointers inward. Move left rightward when the current value/combination is too small (e.g., sum < target). Move right leftward when it is too large (e.g., sum > target). The decision always depends on the problem condition."
+      },
+      {
+        "front": "Write pseudocode for the swapping pattern in opposite pointers. In what types of problems do we use it? (Hint: grouping)",
+        "back": "Pseudocode:\n```\nleft = 0\nright = n - 1\nwhile left < right:\n    if arr[left] belongs on the right side (violates left-group condition):\n        swap(arr[left], arr[right])\n        right--\n    else:\n        left++\n```\nUsed for grouping problems: move zeros to front/back, separate positives/negatives, partition around a value."
+      },
+      {
+        "front": "Explain two-way partitioning using opposite pointers. How is it related to the swapping pattern?",
+        "back": "Two-way partitioning splits the array into two groups (e.g., ≤ pivot on left, > pivot on right) in one pass. It is the classic application of the swapping pattern (exactly the same logic as quicksort partition)."
+      },
+      {
+        "front": "In two-way partitioning, when do you move the left and right pointers, when do you stop them (and why), and when do you swap (and why)?",
+        "back": "• Move left right while arr[left] satisfies left-group condition. \n• Move right left while arr[right] satisfies right-group condition. \n• Stop when left >= right (pointers crossed → entire array partitioned). \n• Swap only when both pointers have stopped on misplaced elements (left found something that belongs on right, right found something that belongs on left) to place them correctly."
+      },
+      {
+        "front": "Why do we use three-way partitioning? What are its goals?",
+        "back": "Use it when the array has exactly three categories of values (e.g., 0/1/2, low/mid/high, or duplicates). Goal: partition into three contiguous groups in a single O(n) pass with constant extra space (Dutch National Flag problem)."
+      },
+      {
+        "front": "In three-way partitioning, how many pointers do you use? What are their names and roles?",
+        "back": "Three pointers: \n• low – boundary for the low-value group (next position to place a low element). \n• mid – scanning/traversal pointer. \n• high – boundary for the high-value group (next position to place a high element)."
+      },
+      {
+        "front": "Explain the behavior of three-way partitioning. How does each pointer behave?",
+        "back": "While mid <= high: \n• If arr[mid] is low value → swap with low, low++, mid++ (extend low group). \n• If arr[mid] is high value → swap with high, high-- (extend high group; mid stays to re-check). \n• If arr[mid] is mid value → mid++ only (correct group). \nLow and high shrink the unknown region from both ends; mid walks through it."
+      },
+      {
+        "front": "Write pseudocode for three-way partitioning.",
+        "back": "```\nlow = 0\nmid = 0\nhigh = n - 1\nwhile mid <= high:\n    if arr[mid] == low_value:  # e.g., 0\n        swap(arr[low], arr[mid])\n        low += 1\n        mid += 1\n    elif arr[mid] == high_value:  # e.g., 2\n        swap(arr[mid], arr[high])\n        high -= 1\n    else:  # mid_value, e.g., 1\n        mid += 1\n```"
+      }
+    ]
+  }
+]
