@@ -61,6 +61,10 @@
       {
         "front": "Why in three-way partitioning mid must be mid <= high (and not just mid < high?",
         "back": "In this algorithm, the high pointer isn't just a boundary; it's the rightmost edge of the 'Unknown' territory. Until mid actually passes high, the element at array[high] is a total mystery—it hasn't been compared to the pivot yet."
+      },
+      {
+        "front": "What is the initial value of mid in three-way partitioning and why?",
+        "back": "mid serves as the primary scanner. It represents the boundary between the elements that have been sorted into the middle group and the elements that have not yet been looked at. By starting at index 0, mid ensures that every single element in the array is evaluated against the pivot. At the start of the process, the entire array is unexamined. Since we haven't categorized any elements into the 'less than,' 'equal to,' or 'greater than' sections yet, the scanning pointer must start at the very first position to begin the classification."
       }
     ]
   }
