@@ -42,5 +42,9 @@
   {
     "front": "Why does the 'shrink once' optimization work in sliding window algorithms?",
     "back": "Because the condition can only be violated by adding the newest element.\n\nSo removing one element from the left is sufficient to restore validity.\n\nThis keeps the algorithm O(n) since each element enters and leaves the window at most once."
+  },
+  {
+    "front": "What's the goal of a fixed-size sliding window?",
+     "back": "To find a specfic property of all subarrays of length K."
   }
 ]
