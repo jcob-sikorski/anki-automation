@@ -1,50 +1,71 @@
 [
   {
-    "front": "What are the two main types of Sliding Window patterns?",
-    "back": "1. Fixed-size window\n- Window size stays constant\n- Move window by removing left element and adding right element\n- Example: max sum of subarray of size k\n\n2. Variable-size window\n- Window expands and shrinks depending on a condition\n- Expand with right pointer\n- Shrink with left pointer while condition is violated\n- Example: longest substring without repeating characters"
-  },
-  {
-    "front": "What is the formula for calculating the length of a sliding window?",
-    "back": "window_length = right - left + 1\n\nExplanation:\nBoth pointers are inclusive. If left = 2 and right = 4, elements are [2,3,4], so length = 4 - 2 + 1 = 3."
-  },
-  {
-    "front": "What is the main goal of the Sliding Window technique?",
-    "back": "To efficiently compute information about contiguous subarrays or substrings without recomputing values from scratch.\n\nInstead of O(n²) brute force, sliding window often reduces complexity to O(n)."
-  },
-  {
-    "front": "What is a subarray?",
-    "back": "A subarray is a contiguous sequence of elements within an array.\n\nExample:\nArray: [1,2,3,4]\nValid subarrays:\n[1], [2], [3], [4]\n[1,2], [2,3], [3,4]\n[1,2,3], [2,3,4]\n[1,2,3,4]\n\nNote: order must stay the same and elements must be adjacent."
-  },
-  {
-    "front": "When should a sliding window expand and when should it shrink?",
-    "back": "Expand the window when the current condition is valid.\n\nShrink the window when the condition becomes invalid.\n\nTypical examples:\n- Too many distinct characters\n- Sum exceeds limit\n- Duplicate element appears\n\nRule:\nExpand → explore possibilities\nShrink → restore validity"
-  },
-  {
-    "front": "What is a running sum in a sliding window?",
-    "back": "A running sum keeps track of the sum of the current window without recomputing it.\n\nUpdate rules:\n- Add nums[right] when expanding\n- Subtract nums[left] when shrinking\n\nUsed for problems like:\n- Maximum subarray sum of size k\n- Minimum subarray with sum ≥ target"
-  },
-  {
-    "front": "How is a frequency map used in sliding window problems?",
-    "back": "A frequency map tracks how many times elements appear inside the window.\n\nUpdate rules:\n- Add element when expanding\n- Decrease/remove element when shrinking\n\nUsed for problems like:\n- Longest substring without repeating characters\n- Minimum window substring\n- Anagram detection"
-  },
-  {
-    "front": "Why use a monotonic deque in sliding window problems?",
-    "back": "A monotonic deque keeps elements in increasing or decreasing order.\n\nPurpose:\nQuickly get the max or min element of the window in O(1).\n\nOperations:\n1. Remove smaller elements from back (for max window)\n2. Add new element\n3. Remove front if it leaves the window\n\nUsed for:\nSliding Window Maximum problem"
-  },
-  {
-    "front": "How can you track how many conditions are satisfied in a sliding window?",
-    "back": "Use a counter that tracks how many requirements are currently satisfied.\n\nExample:\nMinimum Window Substring\n\nMaintain:\n- required count\n- formed count\n\nWhen frequency requirement is met → increase formed\nWhen shrinking breaks requirement → decrease formed"
-  },
-  {
-    "front": "What is the 'shrink once' optimization in sliding window problems?",
-    "back": "Instead of shrinking the window in a loop, you shrink it only once per iteration.\n\nThis works when removing one element is enough to restore the condition.\n\nExample:\nLongest substring with at most K distinct characters"
-  },
-  {
-    "front": "Why does the 'shrink once' optimization work in sliding window algorithms?",
-    "back": "Because the condition can only be violated by adding the newest element.\n\nSo removing one element from the left is sufficient to restore validity.\n\nThis keeps the algorithm O(n) since each element enters and leaves the window at most once."
-  },
-  {
-    "front": "What's the goal of a fixed-size sliding window?",
-     "back": "To find a specfic property of all subarrays of length K."
+    "tags": [
+      "leetcode",
+      "patterns",
+      "sliding-window"
+    ],
+    "cards": [
+      {
+        "front": "What are the two main types of Sliding Window patterns?",
+        "back": "1. Fixed-size window\n- Window size stays constant\n- Move window by removing left element and adding right element\n- Example: max sum of subarray of size k\n\n2. Variable-size window\n- Window expands and shrinks depending on a condition\n- Expand with right pointer\n- Shrink with left pointer while condition is violated\n- Example: longest substring without repeating characters"
+      },
+      {
+        "front": "What is the formula for calculating the length of a sliding window?",
+        "back": "window_length = right - left + 1\n\nExplanation:\nBoth pointers are inclusive. If left = 2 and right = 4, elements are [2,3,4], so length = 4 - 2 + 1 = 3."
+      },
+      {
+        "front": "What is the main goal of the Sliding Window technique?",
+        "back": "To efficiently compute information about contiguous subarrays or substrings without recomputing values from scratch.\n\nInstead of O(n²) brute force, sliding window often reduces complexity to O(n)."
+      },
+      {
+        "front": "What is a subarray?",
+        "back": "A subarray is a contiguous sequence of elements within an array.\n\nExample:\nArray: [1,2,3,4]\nValid subarrays:\n[1], [2], [3], [4]\n[1,2], [2,3], [3,4]\n[1,2,3], [2,3,4]\n[1,2,3,4]\n\nNote: order must stay the same and elements must be adjacent."
+      },
+      {
+        "front": "When should a sliding window expand and when should it shrink?",
+        "back": "Expand the window when the current condition is valid.\n\nShrink the window when the condition becomes invalid.\n\nTypical examples:\n- Too many distinct characters\n- Sum exceeds limit\n- Duplicate element appears\n\nRule:\nExpand → explore possibilities\nShrink → restore validity"
+      },
+      {
+        "front": "What is a running sum in a sliding window?",
+        "back": "A running sum keeps track of the sum of the current window without recomputing it.\n\nUpdate rules:\n- Add nums[right] when expanding\n- Subtract nums[left] when shrinking\n\nUsed for problems like:\n- Maximum subarray sum of size k\n- Minimum subarray with sum ≥ target"
+      },
+      {
+        "front": "How is a frequency map used in sliding window problems?",
+        "back": "A frequency map tracks how many times elements appear inside the window.\n\nUpdate rules:\n- Add element when expanding\n- Decrease/remove element when shrinking\n\nUsed for problems like:\n- Longest substring without repeating characters\n- Minimum window substring\n- Anagram detection"
+      },
+      {
+        "front": "Why use a monotonic deque in sliding window problems?",
+        "back": "A monotonic deque keeps elements in increasing or decreasing order.\n\nPurpose:\nQuickly get the max or min element of the window in O(1).\n\nOperations:\n1. Remove smaller elements from back (for max window)\n2. Add new element\n3. Remove front if it leaves the window\n\nUsed for:\nSliding Window Maximum problem"
+      },
+      {
+        "front": "How can you track how many conditions are satisfied in a sliding window?",
+        "back": "Use a counter that tracks how many requirements are currently satisfied.\n\nExample:\nMinimum Window Substring\n\nMaintain:\n- required count\n- formed count\n\nWhen frequency requirement is met → increase formed\nWhen shrinking breaks requirement → decrease formed"
+      },
+      {
+        "front": "What is the 'shrink once' optimization in sliding window problems?",
+        "back": "Instead of shrinking the window in a loop, you shrink it only once per iteration.\n\nThis works when removing one element is enough to restore the condition.\n\nExample: Longest substring with at most K distinct characters"
+      },
+      {
+        "front": "Why does the 'shrink once' optimization work in sliding window algorithms?",
+        "back": "Because the condition can only be violated by adding the newest element.\n\nSo removing one element from the left is sufficient to restore validity.\n\nThis keeps the algorithm O(n) since each element enters and leaves the window at most once."
+      },
+      {
+        "front": "How does the 'shrink once' optimization work in sliding window algorithms?",
+        "back": "The 'shrink once' optimization means:\n- When the window becomes invalid, shrink it by **only 1 element at a time** instead of fully recalculating.\n- When the window is valid, **expand normally**.\n- This ensures correctness while avoiding unnecessary work.\n- Example usage: calculating the maximum length of a valid substring."
+      },
+      {
+        "front": "What's the goal of a fixed-size sliding window?",
+        "back": "To find a specfic property of all subarrays of length K."
+      },
+      {
+        "text": "In a dynamically-sized sliding window we {{c1::expand the window while the condition is valid}} and {{c2::shrink the window until the condition becomes valid again}}.",
+        "extra": ""
+      },
+      {
+        "front": "What are 4 efficient ways to track state in a sliding window, and when should each be used?",
+        "back": "1. Running Sum: For aggregate values (sum/avg).\n2. Frequency Map: For counts/duplicates.\n3. Monotonic Queue: For O(1) min/max tracking.\n4. Counter/Predicate: For boolean satisfaction (e.g., all chars matched)."
+      }
+    ]
   }
 ]

@@ -5,13 +5,14 @@ import questionary
 
 ANKI_CONNECT_URL = "http://localhost:8765"
 DECK_NAME = "LeetCode Patterns"
-MODEL_NAME = "Basic"
+BASIC_MODEL = "Basic"
+CLOZE_MODEL = "Cloze"
 JSON_FOLDER = "json"
 
 
-def add_note(front, back, tags=None):
-    if tags is None:
-        tags = ["leetcode", "patterns"]
+def add_note(front, back=None, tags=None, cloze=False):
+    model_name = CLOZE_MODEL if cloze else BASIC_MODEL
+    fields = {"Front": front, "Back": back} if not cloze else {"Text": front, "Extra": back or ""}
 
     payload = {
         "action": "addNote",
@@ -19,39 +20,41 @@ def add_note(front, back, tags=None):
         "params": {
             "note": {
                 "deckName": DECK_NAME,
-                "modelName": MODEL_NAME,
-                "fields": {
-                    "Front": front,
-                    "Back": back
-                },
-                "tags": tags
+                "modelName": model_name,
+                "fields": fields,
+                "tags": tags or []
             }
         }
     }
 
     response = requests.post(ANKI_CONNECT_URL, json=payload).json()
-
     if response.get("error"):
         print("Error:", response["error"])
     else:
-        print("Added card:", front)
+        print("Added card:", front[:50] + ("..." if len(front) > 50 else ""))
 
 
 def import_cards_from_json(file_path):
     with open(file_path, "r") as f:
-        cards = json.load(f)
+        groups = json.load(f)
 
-    for card in cards:
-        front = card["front"]
-        back = card["back"]
-        tags = card.get("tags", ["leetcode", "patterns"])
+    for group in groups:
+        group_tags = group.get("tags", [])
+        cards = group.get("cards", [])
 
-        add_note(front, back, tags)
+        for card in cards:
+            front = card.get("front") or card.get("text")
+            back = card.get("back") or card.get("extra")
+            if not front:
+                print("Skipping card with missing front/text:", card)
+                continue
+
+            cloze = "extra" in card
+            add_note(front, back, tags=group_tags, cloze=cloze)
 
 
 def choose_json_file():
     files = [f for f in os.listdir(JSON_FOLDER) if f.endswith(".json")]
-
     if not files:
         print("No JSON files found in json/ folder.")
         exit()
