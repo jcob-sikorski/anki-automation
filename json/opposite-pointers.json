@@ -57,6 +57,10 @@
       {
         "front": "Write pseudocode for three-way partitioning.",
         "back": "```\nlow = 0\nmid = 0\nhigh = n - 1\nwhile mid <= high:\n    if arr[mid] == low_value:  # e.g., 0\n        swap(arr[low], arr[mid])\n        low += 1\n        mid += 1\n    elif arr[mid] == high_value:  # e.g., 2\n        swap(arr[mid], arr[high])\n        high -= 1\n    else:  # mid_value, e.g., 1\n        mid += 1\n```"
+      },
+      {
+        "front": "Why in three-way partitioning mid must be mid <= high (and not just mid < high?",
+        "back": "In this algorithm, the high pointer isn't just a boundary; it's the rightmost edge of the 'Unknown' territory. Until mid actually passes high, the element at array[high] is a total mystery—it hasn't been compared to the pivot yet."
       }
     ]
   }
