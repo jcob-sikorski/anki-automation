@@ -1,0 +1,43 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "dp"
+    ],
+    "cards": [
+      {
+        "front": "Explain the top-down approach in dynamic programming.",
+        "back": "Top-down dynamic programming solves the problem using recursion and memoization. You start from the main problem and recursively break it into smaller subproblems. Each function call represents a subproblem, and results are stored in a memo table to avoid recomputation.\n\nSteps:\n1. Define the recursive relation for the problem.\n2. Check base cases.\n3. If the result for the current state was already computed (memoized), return it.\n4. Otherwise compute it using recursive calls.\n5. Store the result in the memo table and return it.\n\nExample idea:\ndp(n) = dp(n-1) + dp(n-2)\n\nKey idea: compute subproblems only when needed (lazy evaluation)."
+      },
+      {
+        "front": "Explain the bottom-up approach in dynamic programming.",
+        "back": "Bottom-up dynamic programming solves the problem iteratively by starting from the smallest subproblems and building up to the final answer.\n\nSteps:\n1. Define a DP table where each entry represents a subproblem.\n2. Initialize base cases.\n3. Iterate through states in the correct order.\n4. Compute each state using previously computed values.\n\nExample idea:\ndp[i] = dp[i-1] + dp[i-2]\n\nKey idea: all smaller subproblems are computed first, so the solution can be built iteratively without recursion."
+      },
+      {
+        "front": "Explain how the linear pattern works in dynamic programming.",
+        "back": "The linear DP pattern appears when the solution for position i depends on one or more previous positions.\n\nTypical recurrence:\ndp[i] = f(dp[i-1], dp[i-2], ...)\n\nExample (Fibonacci):\ndp[i] = dp[i-1] + dp[i-2]\n\nSteps:\n1. Define dp[i] as the answer for prefix / position i.\n2. Initialize base cases (e.g., dp[0], dp[1]).\n3. Iterate from left to right.\n4. Compute dp[i] using previously computed states.\n\nCommon problems:\n- Fibonacci\n- Climbing Stairs\n- House Robber"
+      },
+      {
+        "front": "Explain how the multi-dimensional grid pattern works in dynamic programming.",
+        "back": "Grid DP is used when the state depends on positions in a 2D grid.\n\nState definition:\ndp[i][j] represents the optimal value to reach cell (i, j).\n\nTypical recurrence:\ndp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])\n\nSteps:\n1. Define dp[i][j] as the best result for cell (i, j).\n2. Initialize the first row and first column.\n3. Iterate through the grid row by row or column by column.\n4. Compute dp[i][j] using top and left neighbors.\n\nCommon problems:\n- Minimum Path Sum\n- Unique Paths\n- Maximum Path Value"
+      },
+      {
+        "front": "Explain how the LCS (Longest Common Subsequence) pattern works in dynamic programming.",
+        "back": "The LCS pattern compares two sequences and finds the longest subsequence present in both.\n\nState definition:\ndp[i][j] = length of the LCS between s1[0..i-1] and s2[0..j-1].\n\nRecurrence:\nIf characters match:\ndp[i][j] = 1 + dp[i-1][j-1]\n\nIf characters do not match:\ndp[i][j] = max(dp[i-1][j], dp[i][j-1])\n\nSteps:\n1. Create a 2D DP table of size (m+1) x (n+1).\n2. Initialize first row and column with 0.\n3. Fill the table using the recurrence.\n4. The answer is dp[m][n].\n\nCommon problems:\n- Longest Common Subsequence\n- Edit Distance\n- Longest Palindromic Subsequence"
+      },
+      {
+        "front": "Explain how the Knapsack pattern works in dynamic programming. Write pseudocode and provide explanation of each line of code.",
+        "back": "The Knapsack pattern is used when we must choose items with weights and values to maximize value while staying within a weight limit.\n\nState definition:\ndp[i][w] = maximum value achievable using the first i items with capacity w.\n\nPseudocode:\n\nn = number of items\nW = capacity\ncreate dp[n+1][W+1]\n\nfor i from 0 to n:\n    dp[i][0] = 0\n\nfor w from 0 to W:\n    dp[0][w] = 0\n\nfor i from 1 to n:\n    for w from 1 to W:\n        if weight[i-1] <= w:\n            dp[i][w] = max(\n                value[i-1] + dp[i-1][w - weight[i-1]],\n                dp[i-1][w]\n            )\n        else:\n            dp[i][w] = dp[i-1][w]\n\nreturn dp[n][W]\n\nExplanation:\n- dp table stores best value for each item/capacity combination.\n- Base cases represent zero items or zero capacity.\n- For each item we decide:\n  1. take the item (add its value and reduce capacity)\n  2. skip the item.\n- We store the maximum of the two options."
+      },
+      {
+        "front": "Explain how the LIS (Longest Increasing Subsequence) pattern works in dynamic programming. Write pseudocode and provide explanation of each line of code.",
+        "back": "The LIS pattern finds the longest strictly increasing subsequence in an array.\n\nState definition:\ndp[i] = length of the longest increasing subsequence ending at index i.\n\nPseudocode:\n\nn = length of nums\ncreate dp[n]\nfill dp with 1\n\nfor i from 1 to n-1:\n    for j from 0 to i-1:\n        if nums[j] < nums[i]:\n            dp[i] = max(dp[i], dp[j] + 1)\n\nreturn max(dp)\n\nExplanation:\n- Each element alone forms a subsequence of length 1.\n- For each index i we check all previous elements j.\n- If nums[j] < nums[i], we can extend the subsequence ending at j.\n- dp[i] stores the best subsequence ending at i.\n- The final answer is the maximum value in the dp array."
+      },
+      {
+        "front": "Explain how the interval DP pattern works in dynamic programming. Write pseudocode and provide explanation of each line of code.",
+        "back": "Interval DP is used when the state represents a subarray or substring defined by two indices.\n\nState definition:\ndp[l][r] = optimal solution for the interval from l to r.\n\nExample idea: combining elements inside an interval.\n\nPseudocode:\n\nn = length of array\ncreate dp[n][n]\n\nfor len from 2 to n:\n    for l from 0 to n - len:\n        r = l + len - 1\n        dp[l][r] = INF\n\n        for k from l to r-1:\n            dp[l][r] = min(\n                dp[l][r],\n                dp[l][k] + dp[k+1][r] + cost(l, r)\n            )\n\nreturn dp[0][n-1]\n\nExplanation:\n- dp[l][r] stores the optimal solution for subarray [l, r].\n- We iterate over interval lengths from small to large.\n- For each interval we try all possible split points k.\n- Each split divides the problem into two smaller intervals.\n- We combine their results and take the optimal value.\n\nCommon problems:\n- Matrix Chain Multiplication\n- Burst Balloons\n- Minimum Cost to Merge Stones"
+      }
+    ]
+  }
+]

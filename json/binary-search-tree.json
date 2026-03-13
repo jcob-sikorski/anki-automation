@@ -1,0 +1,27 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "binary-search-tree"
+    ],
+    "cards": [
+      {
+        "front": "Explain the core property of a Binary Search Tree (BST).",
+        "back": "For every node in a BST: all values in the left subtree are strictly smaller than the node's value, and all values in the right subtree are strictly greater than the node's value. This property holds recursively for every subtree, which allows efficient searching by discarding half of the tree at each step."
+      },
+      {
+        "front": "When the target value is bigger than the root in a BST, do you go left or right? Why?",
+        "back": "Go right. In a BST, all values greater than the current node are located in the right subtree, while the left subtree only contains smaller values. Therefore, if target > node.val, the search must continue in the right subtree."
+      },
+      {
+        "front": "Explain what the Lowest Common Ancestor (LCA) is in a BST. What are the edge cases?",
+        "back": "The Lowest Common Ancestor (LCA) of two nodes p and q is the lowest node in the tree that has both p and q as descendants (a node can be a descendant of itself).\n\nIn a BST, the LCA is the first node where the search paths to p and q diverge according to the BST ordering property.\n\nEdge cases:\n• One node is the ancestor of the other (that node itself is the LCA).\n• One or both nodes are the root.\n• The nodes lie on different sides of a node (one smaller and one larger).\n• The tree contains only one node."
+      },
+      {
+        "front": "Explain the pseudocode for finding the Lowest Common Ancestor (LCA) in a BST.",
+        "back": "Use the BST ordering property to move down the tree.\n\nPseudocode:\n\nnode = root\nwhile node != null:\n\n  if p.val < node.val and q.val < node.val:\n      node = node.left\n\n  else if p.val > node.val and q.val > node.val:\n      node = node.right\n\n  else:\n      return node\n\nExplanation:\n• If both p and q are smaller than node, the LCA must be in the left subtree.\n• If both are greater than node, the LCA must be in the right subtree.\n• Otherwise, p and q lie on different sides of node (or one equals node), meaning this node is the LCA."
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "backtracking"
+    ],
+    "cards": [
+      {
+        "front": "Explain how backtracking works.",
+        "back": "Backtracking systematically explores all possible choices in a search space by building a partial solution step by step. At each step you:\n1. Choose an option and add it to the current path/state.\n2. Recurse to explore deeper.\n3. If the path leads to a solution, record it.\n4. Undo the last choice (remove from the path) before exploring the next option.\n\nThis \"choose → explore → unchoose\" pattern ensures the algorithm explores all possibilities without permanently modifying shared state."
+      },
+      {
+        "front": "What patterns/algorithms use backtracking? Explain each one.",
+        "back": "Common problems solved with backtracking:\n\n• Subsets – generate all subsets of a set by deciding for each element whether to include it.\n• Combinations – choose k elements from n without regard to order.\n• Permutations – generate all possible orderings of elements.\n• Partitioning – split a structure into valid segments (e.g., palindrome partitioning).\n• Constraint problems – e.g., N-Queens, Sudoku, where choices must satisfy constraints.\n• Word search / grid path search – explore paths in a grid while respecting rules.\n\nAll follow the same structure: recursively explore choices, undoing each choice after exploring it."
+      },
+      {
+        "front": "Explain what backtracking is.",
+        "back": "Backtracking is a recursive brute-force search technique that explores all possible solutions by incrementally building candidates and abandoning (backtracking from) a candidate as soon as it violates a constraint or cannot lead to a valid solution."
+      },
+      {
+        "front": "How is backtracking used for combinations and subsets? Explain the algorithm.",
+        "back": "Use a start index to avoid reusing earlier elements and to prevent duplicate sets.\n\nAlgorithm:\n1. Maintain a current path (partial subset/combination).\n2. Iterate i from start to n.\n3. Add nums[i] to the path.\n4. Recurse with start = i + 1.\n5. After recursion, remove nums[i] (backtrack).\n\nThis ensures elements are only considered forward in the array, producing unique combinations/subsets."
+      },
+      {
+        "front": "How is backtracking used for permutations? Explain the algorithm.",
+        "back": "Permutations require trying every element in every position.\n\nAlgorithm:\n1. Maintain a current path.\n2. Track which elements are already used (visited array/set).\n3. Loop through all elements each step.\n4. If an element is not visited:\n   - mark it visited\n   - add it to the path\n   - recurse\n   - remove it from the path and mark it unvisited\n\nWhen the path length equals n, a full permutation has been generated."
+      },
+      {
+        "front": "How does pruning work in backtracking?",
+        "back": "Pruning stops exploring a branch early when it cannot produce a valid solution. If the current partial state violates constraints or cannot possibly lead to a solution, the algorithm immediately returns without exploring deeper.\n\nThis reduces the search space and significantly improves performance."
+      },
+      {
+        "front": "What is partitioning in backtracking?",
+        "back": "Partitioning is a backtracking pattern where the input (usually a string or array) is divided into multiple segments that must satisfy a condition. Each recursive step chooses a valid next segment and continues partitioning the remaining part of the input."
+      },
+      {
+        "front": "How does partitioning work in backtracking? Explain the algorithm in detail.",
+        "back": "Partitioning explores all ways to split a structure into valid parts.\n\nAlgorithm:\n1. Maintain a current list of partitions (path).\n2. Start at an index in the input.\n3. For each possible end index from start → n:\n   - check if the substring/segment is valid (e.g., palindrome).\n   - if valid, add it to the path.\n   - recurse starting from end + 1.\n4. If start reaches the end of the input, record the partition.\n5. Remove the last segment (backtrack) and try the next possible segment.\n\nExample: Palindrome Partitioning explores every substring starting at the current index and recurses only if it forms a palindrome."
+      }
+    ]
+  }
+]
