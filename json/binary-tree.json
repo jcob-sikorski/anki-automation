@@ -1,0 +1,75 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "binary-tree"
+    ],
+    "cards": [
+      {
+        "front": "Explain the goal of DFS in a binary tree.",
+        "back": "DFS (Depth-First Search) explores a binary tree by going as deep as possible along a branch before backtracking. The goal is to fully process each subtree before moving to siblings. It is commonly used for problems that require aggregating results from children, exploring paths, or computing values like height, path sums, or subtree properties."
+      },
+      {
+        "front": "Explain the goal of BFS in a binary tree.",
+        "back": "BFS (Breadth-First Search) explores the tree level by level from the root downward. The goal is to process nodes in order of their distance from the root. It is commonly used for level-order traversal, shortest path in unweighted trees, and problems involving levels (e.g., average of each level, right-side view)."
+      },
+      {
+        "front": "Explain the behavior of DFS in a binary tree.",
+        "back": "DFS starts at the root and recursively explores one child subtree completely before visiting the other. The traversal follows one branch down to a leaf, then backtracks to explore other branches. DFS is typically implemented using recursion or an explicit stack."
+      },
+      {
+        "front": "Explain the behavior of BFS in a binary tree.",
+        "back": "BFS starts at the root and visits nodes level by level. It processes all nodes at the current depth before moving to the next level. BFS is implemented using a queue where nodes are added as their parents are processed."
+      },
+      {
+        "front": "Explain the properties of BFS in a binary tree.",
+        "back": "• Traverses nodes level by level.\n• Uses a queue data structure.\n• Processes nodes in order of distance from the root.\n• Naturally groups nodes by levels.\n• Useful for shortest path in unweighted trees and level-based problems.\n• Time complexity: O(n).\n• Space complexity: O(w) where w is the maximum width of the tree."
+      },
+      {
+        "front": "Explain pre-order traversal using DFS in a binary tree. What are its properties?",
+        "back": "Pre-order traversal processes nodes in the order: Root → Left → Right. The current node is visited before its children. Properties:\n• Root is processed before its subtrees.\n• Useful for copying or serializing a tree.\n• Maintains the structure of the tree when rebuilding."
+      },
+      {
+        "front": "Write a pseudocode for pre-order traversal using DFS in a binary tree.",
+        "back": "function preorder(node):\n    if node == null:\n        return\n\n    visit(node)\n    preorder(node.left)\n    preorder(node.right)"
+      },
+      {
+        "front": "Explain in-order traversal using DFS in a binary tree. What are its properties?",
+        "back": "In-order traversal processes nodes in the order: Left → Root → Right. Properties:\n• The left subtree is processed before the node.\n• The right subtree is processed after the node.\n• In a Binary Search Tree (BST), in-order traversal visits nodes in sorted order."
+      },
+      {
+        "front": "Write a pseudocode for in-order traversal using DFS in a binary tree.",
+        "back": "function inorder(node):\n    if node == null:\n        return\n\n    inorder(node.left)\n    visit(node)\n    inorder(node.right)"
+      },
+      {
+        "front": "Explain post-order traversal using DFS in a binary tree. What are its properties?",
+        "back": "Post-order traversal processes nodes in the order: Left → Right → Root. Properties:\n• Both subtrees are processed before the node itself.\n• Useful when results depend on children values.\n• Commonly used for deleting trees, computing heights, or dynamic programming on trees."
+      },
+      {
+        "front": "Write a pseudocode for post-order traversal using DFS in a binary tree.",
+        "back": "function postorder(node):\n    if node == null:\n        return\n\n    postorder(node.left)\n    postorder(node.right)\n    visit(node)"
+      },
+      {
+        "front": "Explain the behavior of a recursive bottom-up pattern in a binary tree. What are its properties?",
+        "back": "The bottom-up pattern processes children first and then computes the result for the current node using results returned from its children. Each recursive call returns information about its subtree to its parent. Properties:\n• Uses post-order traversal.\n• Each node returns a value to its parent.\n• Parent combines results from left and right children.\n• Common for computing height, diameter, balanced tree checks, or subtree sums."
+      },
+      {
+        "front": "Write a pseudocode for recursive bottom-up pattern in a binary tree.",
+        "back": "function dfs(node):\n    if node == null:\n        return base_value\n\n    left = dfs(node.left)\n    right = dfs(node.right)\n\n    result = combine(left, right, node)\n\n    return result"
+      },
+      {
+        "front": "Explain how to calculate the path sum in a binary tree.",
+        "back": "To calculate a root-to-leaf path sum, recursively track the accumulated sum while traversing the tree. At each node add its value to the current sum. When a leaf node is reached, check whether the accumulated sum equals the target. The recursion explores all root-to-leaf paths."
+      },
+      {
+        "front": "Write pseudocode to calculate the path sum in a binary tree.",
+        "back": "function hasPathSum(node, target, currentSum):\n    if node == null:\n        return false\n\n    currentSum += node.value\n\n    if node.left == null and node.right == null:\n        return currentSum == target\n\n    return hasPathSum(node.left, target, currentSum) OR\n           hasPathSum(node.right, target, currentSum)"
+      },
+      {
+        "front": "Explain how to calculate the path sum (any node to any node) in a binary tree.",
+        "back": "To compute the maximum path sum between any two nodes, use a DFS bottom-up approach. For each node compute the maximum gain from its left and right child (ignore negative contributions). The best path through the node is: node.value + left_gain + right_gain. Track the global maximum while recursion returns the best single-branch gain: node.value + max(left_gain, right_gain)."
+      }
+    ]
+  }
+]
