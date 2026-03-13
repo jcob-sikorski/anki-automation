@@ -1,0 +1,39 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "stack"
+    ],
+    "cards": [
+      {
+        "front": "What information can a monotonically increasing stack provide?",
+        "back": "A monotonically increasing stack stores elements in increasing order from bottom to top. It allows you to determine:\n\n1. The nearest smaller element to the left (previous smaller element).\n2. The nearest smaller element to the right (when an element causes pops).\n3. Which elements remain valid candidates for future comparisons.\n\nWhen a new element causes elements to be popped, it means the current element is the next smaller element for all popped elements."
+      },
+      {
+        "front": "How does a monotonically increasing stack work?",
+        "back": "While inserting a new element x:\n\n1. Pop elements from the stack while stack.top() > x.\n2. For every popped element, x is its next smaller element.\n3. After popping larger elements, push x onto the stack.\n\nThis maintains the invariant that elements in the stack are always in increasing order."
+      },
+      {
+        "front": "How is a stack used to validate or balance parentheses (or similar paired characters)?",
+        "back": "Traverse the string and push opening brackets onto the stack.\n\nWhen encountering a closing bracket:\n1. Check the top of the stack.\n2. If it matches the corresponding opening bracket, pop it.\n3. Otherwise, the string is invalid.\n\nAt the end, the string is valid if and only if the stack is empty."
+      },
+      {
+        "front": "What pattern can be used to quickly compute min/max values from the edges of an array?",
+        "back": "Prefix–suffix arrays.\n\nPrefix array:\n- prefix[i] stores the min/max value from index 0 to i.\n\nSuffix array:\n- suffix[i] stores the min/max value from index i to n-1.\n\nThis allows constant-time queries for extreme values from the left or right side of the array without using a stack."
+      },
+      {
+        "front": "How do you detect subarrays (not necessarily starting at index 0) that sum to k?",
+        "back": "Use the prefix sum + hash map pattern.\n\nLet prefix_sum be the sum up to index i.\n\nIf prefix_sum - k exists in the map, it means there is a previous index where the prefix sum was prefix_sum - k, so the subarray between those indices sums to k.\n\nThe map stores frequencies of prefix sums to count how many such subarrays exist."
+      },
+      {
+        "front": "How can you efficiently compare substrings or subarrays?",
+        "back": "Use a rolling hash (e.g., Rabin–Karp).\n\nInstead of recomputing the hash from scratch:\n1. Remove the contribution of the outgoing element.\n2. Multiply by the base.\n3. Add the incoming element.\n\nIf two hashes match, the substrings are very likely equal (often confirmed with a direct comparison if needed)."
+      },
+      {
+        "front": "How does the bitwise AND (&) operator work?",
+        "back": "Bitwise AND compares bits at the same position in two numbers.\n\nThe result bit is 1 only if both bits are 1.\n\nExample:\n6  = 110\n3  = 011\n6 & 3 = 010 = 2"
+      }
+    ]
+  }
+]

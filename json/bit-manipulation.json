@@ -1,0 +1,75 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "bit-manipulation"
+    ],
+    "cards": [
+      {
+        "front": "How does the bitwise AND (&) operator work?",
+        "back": "Each bit of the result is 1 only if BOTH corresponding bits are 1. Example: 1010 & 1100 = 1000. It is commonly used for masking (extracting specific bits)."
+      },
+      {
+        "front": "How does the bitwise OR (|) operator work?",
+        "back": "Each bit of the result is 1 if ANY corresponding bit is 1. Example: 1010 | 1100 = 1110. Often used to set bits."
+      },
+      {
+        "front": "How does the bitwise XOR (^) operator work?",
+        "back": "Each bit of the result is 1 if the bits are different. Example: 1010 ^ 1100 = 0110. Important property: a ^ a = 0 and a ^ 0 = a. Because duplicates cancel out, XOR is often used to find a unique element in an array."
+      },
+      {
+        "front": "How does the bitwise NOT (~) operator work?",
+        "back": "It flips every bit: 1 becomes 0 and 0 becomes 1. Example: ~0001 = 1110 (in a limited bit representation). In signed integers it also changes the sign due to two's complement."
+      },
+      {
+        "front": "How does the left shift operator (<<) work?",
+        "back": "Shifts all bits to the left by n positions. Zeros are inserted on the right. Example: 0011 << 2 = 1100. For integers this is equivalent to multiplying by 2^n (when no overflow occurs)."
+      },
+      {
+        "front": "How does the right shift operator (>>) work?",
+        "back": "Shifts all bits to the right by n positions. The rightmost bits are discarded. For positive integers this is equivalent to floor division by 2^n. Example: 1100 >> 2 = 0011."
+      },
+      {
+        "front": "What are the key properties of XOR useful in algorithms?",
+        "back": "Important properties: a ^ a = 0, a ^ 0 = a, XOR is commutative (a ^ b = b ^ a) and associative. Because equal numbers cancel out, XOR can be used to find the single non-duplicate element in O(n) time and O(1) space."
+      },
+      {
+        "front": "How can you check if a number is a power of two using bit operations?",
+        "back": "Use: n > 0 && (n & (n - 1)) == 0. Subtracting 1 flips all bits to the right of the lowest 1. ANDing removes the lowest set bit. If the result becomes 0, the number had exactly one 1 bit."
+      },
+      {
+        "front": "How do you get the i-th bit of a number?",
+        "back": "(n >> i) & 1. First shift the desired bit to the least significant position, then mask it using AND with 1."
+      },
+      {
+        "front": "How do you set the i-th bit of a number?",
+        "back": "n | (1 << i). The mask (1 << i) has a 1 at the desired position. OR guarantees that bit becomes 1."
+      },
+      {
+        "front": "How do you clear the i-th bit of a number?",
+        "back": "n & ~(1 << i). The mask ~(1 << i) contains 0 at position i and 1 everywhere else, so AND removes that bit."
+      },
+      {
+        "front": "How do you flip (toggle) the i-th bit of a number?",
+        "back": "n ^ (1 << i). XOR toggles the bit: 0 becomes 1 and 1 becomes 0."
+      },
+      {
+        "front": "What is Hamming weight (population count)?",
+        "back": "The number of bits set to 1 in the binary representation of a number."
+      },
+      {
+        "front": "How can you efficiently compute Hamming weight?",
+        "back": "Use Brian Kernighan's algorithm: repeatedly remove the lowest set bit using n &= (n - 1) and increment a counter. Each iteration removes one 1 bit, so the loop runs exactly as many times as there are set bits."
+      },
+      {
+        "front": "What is a bitmask?",
+        "back": "A bitmask is a binary pattern used to select, set, clear, or toggle specific bits using bitwise operations."
+      },
+      {
+        "front": "How does masking (bit chopping) work?",
+        "back": "Use AND with a mask containing 1s at positions you want to keep and 0s elsewhere. Example: n & 00001111 keeps the lowest four bits and clears all others."
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "linked-list"
+    ],
+    "cards": [
+      {
+        "front": "What is the purpose of dummy head (or dummy tail) nodes in a linked list? How do you declare them and what problems do they simplify?",
+        "back": "Dummy nodes are artificial nodes placed before the real head (dummy head) or after the tail. They simplify edge cases where operations involve the head node.\n\nDeclaration:\n- dummy = ListNode(0)\n- dummy.next = head\n\nWhy they help:\n- Avoid special cases when inserting or deleting the head\n- Provide a stable pointer before the list\n\nOperations they simplify:\n- Deleting the first node\n- Inserting at the beginning\n- Merging two lists\n- Reversing sublists\n\nExample idea:\nInstead of modifying head directly, operate on dummy.next and return dummy.next at the end."
+      },
+      {
+        "front": "Explain the two-pointer (fast and slow) technique in linked lists. What problems does it solve?",
+        "back": "The two-pointer technique uses two pointers moving through the list at different speeds.\n\nTypical setup:\n- slow moves 1 step\n- fast moves 2 steps\n\nCommon uses:\n1. Find the middle of a list\n2. Detect cycles (Floyd's cycle detection)\n3. Find the start of a cycle\n4. Split a list into two halves\n\nExample pattern:\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n\nWhen the loop ends, slow is usually at the middle."
+      },
+      {
+        "front": "Write pseudocode to reverse a singly linked list using the prev–curr–next pointer technique.",
+        "back": "Idea: reverse the direction of pointers one node at a time.\n\nprev = None\ncurr = head\n\nwhile curr:\n    next = curr.next\n    curr.next = prev\n    prev = curr\n    curr = next\n\nreturn prev\n\nExplanation:\n- prev stores the reversed part\n- curr is the current node\n- next temporarily stores the remainder of the list\n- After the loop, prev becomes the new head."
+      },
+      {
+        "front": "Write pseudocode for the 'runner' technique to find the intersection node of two linked lists.",
+        "back": "Idea: make both pointers traverse the same total distance.\n\np1 = headA\np2 = headB\n\nwhile p1 != p2:\n    if p1 is None:\n        p1 = headB\n    else:\n        p1 = p1.next\n\n    if p2 is None:\n        p2 = headA\n    else:\n        p2 = p2.next\n\nreturn p1\n\nExplanation:\n- Each pointer traverses A + B length\n- If an intersection exists, they meet at the intersection node\n- If not, both become None at the same time."
+      },
+      {
+        "front": "How does the loop condition 'while cur:' behave when traversing a linked list?",
+        "back": "Meaning: continue while the current node exists.\n\nProperties:\n1. The loop runs once for every node in the list.\n2. The last node is processed inside the loop.\n3. The loop stops when cur becomes None.\n\nTypical traversal pattern:\ncur = head\nwhile cur:\n    process(cur)\n    cur = cur.next"
+      },
+      {
+        "front": "How does the loop condition 'while cur and cur.next:' behave when traversing a linked list?",
+        "back": "Meaning: continue while both the current node and the next node exist.\n\nProperties:\n1. Used when working with node pairs or looking ahead.\n2. Prevents accessing cur.next when cur is the tail.\n3. The loop never runs for the last node.\n\nTypical uses:\n- Swapping pairs\n- Fast/slow pointer movement\n- Checking two nodes at once"
+      }
+    ]
+  }
+]
