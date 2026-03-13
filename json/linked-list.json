@@ -29,6 +29,38 @@
       {
         "front": "How does the loop condition 'while cur and cur.next:' behave when traversing a linked list?",
         "back": "Meaning: continue while both the current node and the next node exist.\n\nProperties:\n1. Used when working with node pairs or looking ahead.\n2. Prevents accessing cur.next when cur is the tail.\n3. The loop never runs for the last node.\n\nTypical uses:\n- Swapping pairs\n- Fast/slow pointer movement\n- Checking two nodes at once"
+      },
+      {
+        "front": "Write pseudocode for the 'runner' technique to find the intersection node of two linked lists.",
+        "back": "Idea: make both pointers traverse the same total distance.\n\np1 = headA\np2 = headB\n\nwhile p1 != p2:\n    if p1 is None:\n        p1 = headB\n    else:\n        p1 = p1.next\n\n    if p2 is None:\n        p2 = headA\n    else:\n        p2 = p2.next\n\nreturn p1\n\nExplanation:\n- Each pointer traverses A + B length\n- If an intersection exists, they meet at the intersection node\n- If not, both become None at the same time."
+      },
+      {
+        "front": "Explain the runner (two-pointer switching) technique for linked list intersection with cases.",
+        "back": "Case 1 — Lists intersect\n\nExample:\n\nA: a1 → a2 → c1 → c2\nB: b1 → b2 → b3 → c1 → c2\n\nShared part: c1 → c2.\n\nThe lists have different prefixes:\n\nA unique: 2 nodes\nB unique: 3 nodes\n\nDuring the first pass the pointers are misaligned because the list lengths differ.\n\nBut after switching lists:\n\np1 path: A → B\np2 path: B → A\n\nNow both pointers have effectively skipped the other's extra prefix, so when they enter the shared section they arrive at the same time.\n\nThey meet at:\n\nc1\n\nCase 2 — No intersection\n\nA: a1 → a2 → a3\nB: b1 → b2\n\nPaths:\n\np1: A → B → None\np2: B → A → None\n\nBoth walk exactly:\n\nm + n\n\nsteps.\n\nSince there is no shared node, the only place they can meet is:\n\nNone\n\nand they reach it at the same time."
+      },
+      {
+        "front": "What is the key idea behind the runner technique for linked list intersection?",
+        "back": "Force both pointers to walk the same total distance.\n\np1 walks: A → B\np2 walks: B → A\n\nBoth travel m + n nodes.\n\nBecause the total distance is equal, the pointers must either:\n- meet at the intersection node, or\n- meet at None if no intersection exists."
+      },
+      {
+        "front": "Why does switching heads equalize pointer alignment in the runner technique?",
+        "back": "Lists may have different prefix lengths before the shared part.\n\nExample:\nA = prefixA + shared\nB = prefixB + shared\n\nWhen pointers switch lists, each pointer effectively walks the other's prefix.\n\np1 walks: prefixA + shared + prefixB\np2 walks: prefixB + shared + prefixA\n\nThis cancels the prefix length difference and aligns both pointers at the start of the shared section."
+      },
+      {
+        "front": "What total distance does each pointer travel in the runner technique?",
+        "back": "Each pointer travels exactly:\n\nm + n\n\nwhere:\n\nm = length of list A\nn = length of list B\n\nPaths:\n\np1: A → B\np2: B → A\n\nThus both traverse the same number of nodes."
+      },
+      {
+        "front": "What happens in the runner technique if the two linked lists do NOT intersect?",
+        "back": "Both pointers traverse A + B nodes.\n\nSince no node is shared, the only place they can meet is:\n\nNone\n\nBoth pointers reach None after exactly m + n steps, so the loop stops and the algorithm returns None."
+      },
+      {
+        "front": "What are the time and space complexities of the runner intersection algorithm?",
+        "back": "Time complexity: O(m + n)\n\nEach pointer traverses both lists once.\n\nSpace complexity: O(1)\n\nOnly two pointers are used; no extra memory is required."
+      },
+      {
+        "front": "Why is the runner technique preferable to computing list lengths first?",
+        "back": "The traditional approach:\n1. Compute lengths of both lists\n2. Advance the longer list by |m − n|\n3. Move both pointers together\n\nThe runner technique avoids explicit length calculation.\n\nSwitching heads automatically compensates for the length difference, making the algorithm simpler while keeping the same O(m + n) time and O(1) space."
       }
     ]
   }
