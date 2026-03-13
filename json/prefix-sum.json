@@ -1,0 +1,80 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "prefix-sum"
+    ],
+    "cards": [
+      {
+        "front": "How can you calculate the range sum between two elements in an array? Explain the algorithm.",
+        "back": "1. Precompute a prefix sum array $P$ where $P[x]$ is the sum of elements from $A[0]$ to $A[x-1]$.\n2. To find the sum of a range $[i, j]$ (inclusive), subtract the prefix sum before the start of the range from the prefix sum at the end of the range.\n3. Formula: $P[j+1] - P[i]$."
+      },
+      {
+        "front": "What is the formula for calculating the range sum between elements $i$ and $j$? Why is it not $P[j] - P[i]$?",
+        "back": "The formula is $P[j+1] - P[i]$. We use $P[j+1]$ because $P[k]$ typically represents the sum of the first $k$ elements. If we used $P[j] - P[i]$, we would accidentally exclude the element at index $j$ and only get the sum up to $j-1$."
+      },
+      {
+        "front": "How to track the number of subarrays that sum to $k$? Explain the algorithm.",
+        "back": "Iterate through the array while maintaining a running prefix sum ($currSum$) and a hashmap of prefix sum frequencies.\n1. At each step, check if $(currSum - k)$ exists in the map.\n2. If it does, add its frequency to your total count.\n3. Update the map with the current $currSum$.\nThis works because if $P[j] - P[i] = k$, then the subarray between $i$ and $j$ sums to $k$."
+      },
+      {
+        "front": "What is the formula used in frequency tracking with a hashmap of subarrays that sum to $k$? Explain its meaning.",
+        "back": "Formula: $currSum - k = target$.\nMeaning: We are looking for a previous prefix sum ($target$) that, when subtracted from our current total ($currSum$), leaves exactly $k$. If we find it, the elements between that previous point and our current point form a valid subarray."
+      },
+      {
+        "front": "What is the meaning of the frequency for an element $P[i]$ in the hashmap when tracking subarrays that sum to $k$?",
+        "back": "The frequency represents how many times that specific prefix sum has occurred so far. Multiple occurrences happen when the elements between those indices sum to zero. Each occurrence represents a different starting point for a subarray that ends at the current index and sums to $k$."
+      },
+      {
+        "front": "How do you check if a subarray sum is divisible by k? Explain the algorithm and the underlying principle.",
+        "back": "Use the Pigeonhole Principle via Prefix Sums. A subarray `sum(i+1, j)` is divisible by `k` if `(P[j] - P[i]) % k == 0`. This is equivalent to `P[j] % k == P[i] % k`. By tracking remainders of prefix sums, if the same remainder appears twice, the elements between those two indices sum to a multiple of `k`."
+      },
+      {
+        "front": "What is the role of the Pigeonhole Principle and Hash Maps in identifying subarrays divisible by k?",
+        "back": "The Pigeonhole Principle guarantees that if you have more than `k` prefix sums, at least two must share the same remainder modulo `k`. To find or count these subarrays, store the frequency of each remainder in a Hash Map. If a remainder `r` has appeared `n` times before the current index, there are `n` possible starting points ending at the current position that form a subarray divisible by `k`."
+      },
+      {
+        "front": "Explain how to calculate 2D prefix sum from (r1, c1) to (r2, c2). Explain what rectangles to add and which to remove (with indexes).",
+        "back": "We use inclusion–exclusion on the prefix sum matrix.\n\nLet prefix[i][j] be the sum of the rectangle from (0,0) to (i,j).\n\nTo compute the sum of the rectangle from (r1, c1) to (r2, c2):\n\nsum = prefix[r2][c2]\n      - prefix[r1-1][c2]\n      - prefix[r2][c1-1]\n      + prefix[r1-1][c1-1]\n\nExplanation of rectangles:\n\n1. Start with prefix[r2][c2]\n   → This contains the entire rectangle (0,0) → (r2,c2).\n\n2. Subtract prefix[r1-1][c2]\n   → Removes the rectangle ABOVE our target area: (0,0) → (r1-1,c2).\n\n3. Subtract prefix[r2][c1-1]\n   → Removes the rectangle LEFT of our target area: (0,0) → (r2,c1-1).\n\n4. Add back prefix[r1-1][c1-1]\n   → The top-left rectangle (0,0) → (r1-1,c1-1) was removed twice in steps 2 and 3, so we add it back once.\n\nSo the final region remaining is exactly the rectangle:\n(r1, c1) → (r2, c2)."
+      },
+
+      {
+        "front": "Explain which rectangle (indexes) we add/subtract when computing a 2D prefix sum query and why we use it.",
+        "back": "sum(r1,c1→r2,c2) = P[r2][c2] - P[r1-1][c2] - P[r2][c1-1] + P[r1-1][c1-1]\n\n+ P[r2][c2] → (0,0→r2,c2)\n- P[r1-1][c2] → remove top\n- P[r2][c1-1] → remove left\n+ P[r1-1][c1-1] → add back overlap\n\nWhy: O(1) submatrix queries."
+      },
+      {
+        "front": "Explain the meaning of P[i][j] in 2D prefix sum.",
+        "back": "P[i][j] = sum of rectangle (0,0 → i,j)\n\nAll rows 0..i and cols 0..j."
+      },
+      {
+        "front": "Which pattern updates every value in range [l,r] by x?",
+        "back": "Difference array.\n\nD[l] += x\nD[r+1] -= x\n\nPrefix sum later applies the change to the whole range."
+      },
+      {
+        "front": "How do you build a difference array from an array?",
+        "back": "D[0] = A[0]\nD[i] = A[i] - A[i-1]"
+      },
+      {
+        "front": "How does range increase/decrease by x work in a difference array?",
+        "back": "Increase [l,r] by x:\nD[l] += x\nD[r+1] -= x\n\nDecrease:\nD[l] -= x\nD[r+1] += x\n\nFinal array = prefix sum of D."
+      },
+      {
+        "front": "How do you reconstruct the value at index i from a difference array?",
+        "back": "Prefix sum:\n\nA[0] = D[0]\nA[i] = A[i-1] + D[i]\n\nProperty: D[i] = A[i] - A[i-1]."
+      },
+      {
+      "front": "What algorithm do you use to do a small number of updates on a huge range (e.g. 10^9)? Explain the algorithm.",
+      "back": "Sparse difference array using a sorted map (boundary tracking).\n\nStore only events:\n+ at start (l) → +x\n+ at end+1 (r+1) → -x\n\nKeep them in a sorted map. Iterate keys in order and compute prefix sum to get the value in each segment."
+      },
+      {
+        "front": "How do you know if a section of a binary array has an equal number of 0s and 1s?",
+        "back": "Convert 0 → -1 and 1 → 1. If a subarray sums to 0, it has equal numbers of 0s and 1s."
+      },
+      {
+        "front": "What prefix sum observation lets you detect equal numbers of 0s and 1s in a subarray?",
+        "back": "If prefix[i] == prefix[j], then the subarray (i+1..j) sums to 0."
+      }
+    ]
+  }
+]
