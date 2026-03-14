@@ -1,0 +1,79 @@
+[
+  {
+    "tags": [
+      "leetcode",
+      "patterns",
+      "binary-search"
+    ],
+    "cards": [
+      {
+        "front": "Explain how the classic binary search algorithm works step by step and why it runs in O(log n) time.",
+        "back": "Binary search works on a sorted array by repeatedly dividing the search space in half. We maintain two pointers: left and right. We compute mid = left + (right - left) // 2 and compare nums[mid] with the target. If nums[mid] == target we return mid. If nums[mid] < target we move left = mid + 1 because the target must be to the right. If nums[mid] > target we move right = mid - 1 because the target must be to the left. Each iteration removes half the remaining elements, so the number of steps grows logarithmically, giving O(log n) time complexity."
+      },
+      {
+        "front": "Write the classic binary search code and explain why the loop condition is left <= right.",
+        "back": "The loop uses left <= right because the search space is inclusive of both ends. When left becomes greater than right, it means the search space is empty and the target does not exist.\n\nCode:\n\ndef binary_search(nums, target):\n    left, right = 0, len(nums) - 1\n    while left <= right:\n        mid = left + (right - left) // 2\n        if nums[mid] == target:\n            return mid\n        elif nums[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1"
+      },
+      {
+        "front": "Explain why in classic binary search we update left = mid + 1 or right = mid - 1 instead of using mid itself.",
+        "back": "When nums[mid] is already compared with the target, we know mid cannot be the answer anymore. If nums[mid] < target, everything left of mid including mid is too small, so we move left = mid + 1. If nums[mid] > target, everything right of mid including mid is too large, so we move right = mid - 1. This prevents infinite loops and ensures the search space shrinks."
+      },
+      {
+        "front": "Explain how the left boundary binary search works and why it is used.",
+        "back": "Left boundary binary search is used when duplicates may exist and we want the first occurrence of a value or the insertion point. Instead of stopping when we find the target, we continue searching to the left. When nums[mid] >= target we move right = mid because mid could still be the first occurrence. When nums[mid] < target we move left = mid + 1 because the boundary must be to the right."
+      },
+      {
+        "front": "Write the code for left boundary binary search and explain why the loop condition is left < right.",
+        "back": "The loop uses left < right because we are shrinking the search space until both pointers meet at the boundary.\n\nCode:\n\ndef find_leftmost(nums, target):\n    left, right = 0, len(nums)\n    while left < right:\n        mid = left + (right - left) // 2\n        if nums[mid] < target:\n            left = mid + 1\n        else:\n            right = mid\n    return left\n\nThe loop stops when left == right, meaning the smallest valid position for the target has been found."
+      },
+      {
+        "front": "Why does left boundary binary search use right = mid instead of right = mid - 1?",
+        "back": "Because mid could still be the first occurrence of the target. If we removed mid with right = mid - 1 we might skip the correct boundary. Using right = mid keeps mid inside the search space so the algorithm can verify whether it is the true boundary."
+      },
+      {
+        "front": "Explain how the right boundary binary search pattern works.",
+        "back": "Right boundary binary search finds the last occurrence of a value in an array with duplicates. The algorithm biases the midpoint toward the right and moves the left pointer when the condition is satisfied. This allows the search to converge on the largest index where the condition holds."
+      },
+      {
+        "front": "Write the code for right boundary binary search and explain why the midpoint formula changes.",
+        "back": "The midpoint is calculated as mid = (left + right + 1) // 2 to bias the midpoint to the right side.\n\nCode:\n\ndef find_rightmost(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        mid = (left + right + 1) // 2\n        if nums[mid] > target:\n            right = mid - 1\n        else:\n            left = mid\n    return left\n\nBiasing mid prevents infinite loops when left and right become very close."
+      },
+      {
+        "front": "Explain the concept of Binary Search on Answer and why it is powerful for optimization problems.",
+        "back": "Binary Search on Answer is used when the problem asks for an optimal threshold rather than an element in an array. Instead of searching indices, we search the range of possible answers. A helper function check(x) determines if a candidate answer x satisfies the constraints. If the answer space is monotonic (False False True True), binary search can efficiently find the first True."
+      },
+      {
+        "front": "Explain the 'Minimize the Maximum' pattern and why it searches for the first True.",
+        "back": "In minimize-the-maximum problems, we want the smallest value that still satisfies a constraint. The check function returns False when the value is too small and True when it becomes large enough. This creates a pattern like False False True True. Binary search finds the first True because that represents the minimal feasible value."
+      },
+      {
+        "front": "Write the template code for the 'Minimize the Maximum' binary search pattern and explain the logic.",
+        "back": "Code:\n\ndef minimize_maximum(nums, k):\n\n    def check(limit):\n        # return True if limit works\n        ...\n\n    left, right = max(nums), sum(nums)\n\n    while left < right:\n        mid = left + (right - left) // 2\n\n        if check(mid):\n            right = mid\n        else:\n            left = mid + 1\n\n    return left\n\nIf check(mid) is True, it means the limit works and we try to find a smaller valid value. If False, the limit is too small so we increase it."
+      },
+      {
+        "front": "Explain the 'Maximize the Minimum' binary search pattern and why it searches for the last True.",
+        "back": "In maximize-the-minimum problems we want the largest value that still satisfies a constraint. The check function returns True while the candidate value is valid but eventually becomes False when the value becomes too large. This produces a pattern like True True False False. Binary search finds the last True because it represents the largest feasible value."
+      },
+      {
+        "front": "Write the template code for the 'Maximize the Minimum' binary search pattern and explain the role of the variable ans.",
+        "back": "Code:\n\ndef maximize_minimum(nums, k):\n\n    nums.sort()\n\n    def check(dist):\n        ...\n\n    left, right = 1, nums[-1] - nums[0]\n    ans = left\n\n    while left <= right:\n        mid = left + (right - left) // 2\n\n        if check(mid):\n            ans = mid\n            left = mid + 1\n        else:\n            right = mid - 1\n\n    return ans\n\nThe variable ans stores the best valid value seen so far because we continue searching for a larger feasible solution."
+      },
+      {
+        "front": "Explain how binary search works on a rotated sorted array.",
+        "back": "In a rotated sorted array, one half of the array is always sorted. At each step we check whether the left half is sorted by comparing nums[left] and nums[mid]. If it is sorted, we check whether the target lies within that range. If yes, we search the left half. Otherwise we search the right half. If the left half is not sorted, then the right half must be sorted and we perform the same logic there."
+      },
+      {
+        "front": "Write the key logic used in binary search for a rotated sorted array and explain how it identifies the sorted half.",
+        "back": "Code snippet:\n\nif nums[left] <= nums[mid]:\n    if nums[left] <= target < nums[mid]:\n        right = mid - 1\n    else:\n        left = mid + 1\nelse:\n    if nums[mid] < target <= nums[right]:\n        left = mid + 1\n    else:\n        right = mid - 1\n\nIf nums[left] <= nums[mid], the left side is sorted. Otherwise the right side must be sorted. Once the sorted half is identified, we check whether the target lies within its boundaries."
+      },
+      {
+        "front": "Explain the key mental shift required to solve Binary Search on Answer problems.",
+        "back": "In standard binary search we search indices of an array to locate a target value. In Binary Search on Answer we search through possible results of the problem. Instead of comparing nums[mid] with a target, we test whether mid is a feasible solution using a check function."
+      },
+      {
+        "front": "How can you recognize binary search optimization problems during interviews?",
+        "back": "Look for phrases like 'minimize the maximum', 'maximize the minimum', 'find the smallest X such that', or 'find the largest Y such that'. These phrases suggest the problem involves searching for an optimal threshold within a monotonic range, which is ideal for Binary Search on Answer."
+      }
+    ]
+  }
+]
