@@ -73,6 +73,26 @@
       {
         "front": "How can you recognize binary search optimization problems during interviews?",
         "back": "Look for phrases like 'minimize the maximum', 'maximize the minimum', 'find the smallest X such that', or 'find the largest Y such that'. These phrases suggest the problem involves searching for an optimal threshold within a monotonic range, which is ideal for Binary Search on Answer."
+      },
+      {
+        "front": "How do you calculate mid in binary search to avoid overflow, and why does it work?",
+        "back": "Use: mid = L + (R - L) / 2.\n\nWhy: (L + R) can overflow if both are large integers. (R - L) is the distance between pointers and is always safe, then added to L.\n\nHow it works: It computes the same midpoint but avoids exceeding integer limits. Integer division floors the result, ensuring that when two elements remain, mid points to the left one."
+      },
+      {
+        "front": "Explain how standard binary search works.",
+        "back": "Goal: Find if a target exists and return its index.\n\nCondition: while (L <= R) → the search space is inclusive.\n\nSteps:\n1. Compute mid.\n2. If arr[mid] == target → return mid.\n3. If arr[mid] < target → search right → L = mid + 1.\n4. If arr[mid] > target → search left → R = mid - 1.\n\nWhy mid ± 1: We already checked mid, so we exclude it from further search."
+      },
+      {
+        "front": "How does leftmost (first occurrence) binary search work?",
+        "back": "Goal: Find the first occurrence of a target (e.g., in [1, 2, 2, 2, 3], find first 2).\n\nCondition: while (L < R).\n\nLogic:\n- If arr[mid] == target → move left → R = mid (keep mid in range).\n- If arr[mid] < target → move right → L = mid + 1.\n\nWhy R = mid: mid could still be the first occurrence, so we keep it.\n\nResult: L (or R) will point to the first occurrence."
+      },
+      {
+        "front": "How does rightmost (last occurrence) binary search work?",
+        "back": "Goal: Find the last occurrence of a target.\n\nCondition: typically while (L <= R) or a variant.\n\nLogic:\n- If arr[mid] == target → move right → L = mid + 1.\n- If arr[mid] < target → L = mid + 1.\n- If arr[mid] > target → R = mid - 1.\n\nWhy: When we find target, we continue searching right to find a later occurrence.\n\nResult: After the loop, the last occurrence is at R (or L - 1)."
+      },
+      {
+        "front": "What do different binary search loop conditions mean (L <= R vs L < R)?",
+        "back": "L <= R:\n- Means: search while the range is valid (inclusive).\n- Used when: looking for an exact value.\n- Stops when the range becomes empty.\n\nL < R:\n- Means: shrink the range until one element remains.\n- Used when: searching for boundaries (first/last occurrence).\n- Stops when L == R, leaving one candidate."
       }
     ]
   }
