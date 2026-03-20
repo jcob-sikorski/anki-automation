@@ -1,0 +1,35 @@
+[
+    {
+    "tags": [
+        "system-design",
+        "estimation",
+        "units"
+    ],
+    "cards": [
+        {
+        "front": "0 (10^0)",
+        "back": "Unit"
+        },
+        {
+        "front": "10^3",
+        "back": "Thousand (Kilo)"
+        },
+        {
+        "front": "10^6",
+        "back": "Million (Mega)"
+        },
+        {
+        "front": "10^9",
+        "back": "Billion (Giga)"
+        },
+        {
+        "front": "10^12",
+        "back": "Trillion (Tera)"
+        },
+        {
+        "front": "10^15",
+        "back": "Quadrillion (Peta)"
+        }
+    ]
+    }
+]
