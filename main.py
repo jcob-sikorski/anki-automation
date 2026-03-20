@@ -4,14 +4,15 @@ import os
 import questionary
 
 ANKI_CONNECT_URL = "http://localhost:8765"
-DECK_NAME = "LeetCode Patterns"
+DECK_NAME = "Time Units"
 MODEL_NAME = "Basic"
 JSON_FOLDER = "json"
+TAGS = ["system-design", "estimation", "time-units"]
 
 
 def add_note(front, back, tags=None):
     if tags is None:
-        tags = ["leetcode", "patterns"]
+        tags = TAGS
 
     payload = {
         "action": "addNote",
@@ -46,7 +47,7 @@ def import_cards_from_json(file_path):
     # 1. Iterate through each group in the JSON array
     for group in data:
         # Extract the shared tags for this block
-        tags = group.get("tags", ["leetcode", "patterns"])
+        tags = group.get("tags", TAGS)
         
         # 2. Iterate through the "cards" list nested inside this group
         for card in group.get("cards", []):
