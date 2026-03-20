@@ -1,0 +1,67 @@
+
+[
+  {
+    "tags": [
+      "system-design",
+      "estimation"
+    ],
+    "cards": [
+      {
+        "front": "L1 cache reference",
+        "back": "0.5–1 ns"
+      },
+      {
+        "front": "Branch mispredict",
+        "back": "3–5 ns"
+      },
+      {
+        "front": "L2 cache reference",
+        "back": "4–12 ns"
+      },
+      {
+        "front": "Mutex lock/unlock (uncontended)",
+        "back": "17–100 ns"
+      },
+      {
+        "front": "Main memory reference (RAM / DRAM)",
+        "back": "100–150 ns"
+      },
+      {
+        "front": "Compress 1 KB (fast algo like Snappy)",
+        "back": "~1–3 μs"
+      },
+      {
+        "front": "Send 1–2 KB over fast network (local / 10 Gbps+)",
+        "back": "~1–10 μs"
+      },
+      {
+        "front": "Random 4 KB read from NVMe SSD",
+        "back": "10–30 μs"
+      },
+      {
+        "front": "Sequential read 1 MB from SSD",
+        "back": "~50–200 μs"
+      },
+      {
+        "front": "Round-trip inside same datacenter",
+        "back": "0.3–1 ms"
+      },
+      {
+        "front": "Sequential read 1 MB from HDD",
+        "back": "~1–5 ms"
+      },
+      {
+        "front": "Random seek on HDD",
+        "back": "~2–10 ms"
+      },
+      {
+        "front": "TCP round-trip (same continent, coast-to-coast)",
+        "back": "~30–100 ms"
+      },
+      {
+        "front": "Full round-trip across oceans (inter-continental)",
+        "back": "~100–300 ms"
+      }
+    ]
+  }
+]
