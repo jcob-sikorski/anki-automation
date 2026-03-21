@@ -303,6 +303,66 @@
             {
                 "front": "What is the requirement for the operands when using the + operator on sequences?",
                 "back": "Both operands must usually be of the same sequence type (e.g., list + list)."
+            },
+            {
+                "front": "When should you use array.array instead of a list?",
+                "back": "When the collection contains only numbers and you need to handle millions of values efficiently. It saves significant memory compared to a list."
+            },
+            {
+                "front": "Why is an array of floats leaner than a list of floats?",
+                "back": "A list stores full float objects with metadata. An array stores only the packed bytes representing the machine values (like a C array)."
+            },
+            {
+                "front": "What extra methods does array.array provide for fast data handling?",
+                "back": ".frombytes() and .tofile() for fast loading and saving of raw data."
+            },
+            {
+                "front": "When is a deque or a set a better choice than a list?",
+                "back": "Use a deque for fast adding/removing from both ends. Use a set for fast membership checking (the 'in' operator)."
+            },
+            {
+                "front": "What are the primary reasons to choose NumPy over standard Python lists or array.array?",
+                "back": "1. Multi-dimensional: Supports N-dimensional arrays/matrices.\n2. Vectorization: Efficient element-wise operations without loops.\n3. Complex Types: Can hold user-defined records.\n4. Foundation: It is the base for the entire SciPy ecosystem."
+            },
+            {
+                "front": "How do NumPy and SciPy achieve 'industrial-strength' performance in Python?",
+                "back": "They wrap highly optimized C and Fortran codebases (like Netlib) with high-level Python APIs. This combines an interactive, user-friendly interface with the raw speed of compiled low-level languages."
+            },
+            {
+                "front": "Why is using a list as a FIFO queue (e.g., .pop(0)) inefficient?",
+                "back": "It is costly because removing from the head (index 0) forces the entire list to be shifted in memory ($O(n)$). A deque handles this in $O(1)$ time."
+            },
+            {
+                "front": "What are the primary advantages of collections.deque over a list?",
+                "back": "1. Performance: O(1) insertions/removals from both ends.\n2. Thread-safety: Designed for safe concurrent access.\n3. Bounded: Supports a fixed maximum length (maxlen)."
+            },
+            {
+                "front": "How does a bounded deque (maxlen) handle new items when full?",
+                "back": "It discards an item from the opposite end to make room for the new one, keeping the total count at the specified maximum length."
+            },
+            {
+                "front": "What is the main purpose of the queue module (Queue, LifoQueue, PriorityQueue)?",
+                "back": "To provide synchronized, thread-safe communication between threads. They can block insertion when full to throttle thread activity."
+            },
+            {
+                "front": "How does a bounded queue.Queue handle being full vs. a bounded deque?",
+                "back": "A deque discards items to make room. A queue.Queue blocks the thread and waits for room to be made."
+            },
+            {
+                "front": "Match the module to the concurrency type: queue, multiprocessing, asyncio.",
+                "back": "queue -> Multi-threading\nmultiprocessing -> Multi-processing (IPC)\nasyncio -> Asynchronous programming"
+            },
+            {
+                "front": "How is heapq implemented differently than other queue modules?",
+                "back": "It is not a class; it is a set of functions (heappush/heappop) that manage a standard list as a heap/priority queue."
+            },
+            {
+                "front": "What is the fundamental difference between a Process and a Thread regarding memory and isolation?",
+                "back": "Process: Owns private memory space; high isolation; heavyweight. Communication requires IPC.\n\nThread: Shares memory within a process; low isolation (can crash the process); lightweight. Communication is easy via shared variables."
+            },
+            {
+                "front": "What is throttling (backpressure) and how does a bounded queue implement it?",
+                "back": "Throttling limits the rate of tasks to protect system resources. By setting a 'maxsize' on a queue, the producer is forced to block (wait) when the queue is full, ensuring that work is only added as fast as the workers can process it."
             }
         ]
     }
