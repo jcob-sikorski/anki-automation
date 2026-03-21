@@ -1,0 +1,234 @@
+[
+    {
+        "tags": [
+            "ml-ops",
+            "llm"
+        ],
+        "cards": [
+            {
+                "front": "How does an LLM's output relate to its training data, and what is the term for when it adopts a specific author's tone?",
+                "back": "An LLM reflects the patterns of its training data (e.g., training on Billie Eilish results in her songwriting style). This phenomenon is known as 'style transfer'."
+            },
+            {
+                "front": "Beyond fine-tuning, how can advanced Retrieval-Augmented Generation (RAG) be used to adjust an LLM's style and voice?",
+                "back": "By leveraging RAG to condition the autoregressive process with previous embeddings. This provides the model with specific stylistic context at the moment of generation to guide its tone and voice."
+            },
+            {
+                "front": "What are the four primary data sources used to fine-tune an LLM into a 'Digital Twin' and their resulting styles?",
+                "back": "1. Social Media (LinkedIn/X): Public brand voice.\n2. Private Messages: Unfiltered, personal voice.\n3. Academic/Formal Papers: Professional, educative voice.\n4. Code: Individual programming style and logic."
+            },
+            {
+                "front": "What does it mean for an ML project to be 'data-centric'?",
+                "back": "The primary focus is on improving the quality, labeling, and consistency of the data itself to drive performance, rather than just tweaking the model code."
+            },
+            {
+                "front": "What is a 'model-agnostic' architecture and why is it used?",
+                "back": "It is an architecture where the underlying model can be easily swapped out. This enables rapid experimentation with different algorithms without rewriting the entire pipeline."
+            },
+            {
+                "front": "What is the FTI (Feature/Training/Inference) architecture, and how does it structure an ML system?",
+                "back": "FTI is a modular design pattern that decouples ML stages:\n1. Feature Pipeline: Transforms raw data into features and saves them to a Feature Store.\n2. Training Pipeline: Consumes features to train/evaluate models, saving results to a Model Registry.\n3. Inference Pipeline: Uses the model and features to generate predictions.\n\nBenefit: Enables independent scaling and updates of data, training, and serving."
+            },
+            {
+                "front": "How do Engineering and Research challenges differ in production ML systems?",
+                "back": "Engineering: Focuses on the 'straightforward' task of training within a complex infrastructure (pipelines/deployment).\n\nResearch: Focuses on the complex task of selecting the correct architecture and hyperparameters.\n\nInsight: Production-ready ML is an ecosystem, not just a model."
+            },
+            {
+                "front": "What are the key engineering requirements for a production-ready ML architecture beyond model training?",
+                "back": "1. Data Ops: Ingest, clean, and validate fresh data.\n2. Infrastructure: Scalable, cost-effective, and separate training/inference setups.\n3. Tracking: Version and share datasets and models.\n4. Monitoring: Observe both infrastructure and model performance.\n5. Automation: Automate deployments and training pipelines."
+            },
+            {
+                "front": "What is a monolithic batch architecture in ML?",
+                "back": "It is an architecture that couples feature creation, model training, and inference into a single component. It usually runs on a schedule and outputs results to a dashboard or database."
+            },
+            {
+                "front": "What is training-serving skew and how does a monolith prevent it?",
+                "back": "Skew is when feature logic differs between training and production. A monolith prevents this by using the exact same code for both stages, ensuring identical feature calculations."
+            },
+            {
+                "front": "What are the limitations of the monolithic batch ML pattern?",
+                "back": "It does not scale well to large datasets and cannot provide real-time/low-latency predictions, as it is designed for scheduled batch processing."
+            },
+            {
+                "front": "What is tokenization?",
+                "back": "The process of breaking raw text into smaller chunks (words, sub-words, or characters) called tokens that the model can process numerically."
+            },
+            {
+                "front": "What are embeddings?",
+                "back": "High-dimensional numerical vectors that represent the 'meaning' of a token. Tokens with similar meanings are mathematically closer together in this vector space."
+            },
+            {
+                "front": "What is the purpose of the Self-Attention mechanism?",
+                "back": "It allows the model to 'attend' to different parts of a sequence to understand context (e.g., knowing that 'it' refers to 'the ball' in a long sentence)."
+            },
+            {
+                "front": "What is a Context Window?",
+                "back": "The maximum number of tokens a model can 'see' and consider at one time during a single request or conversation."
+            },
+            {
+                "front": "What is Reinforcement Learning from Human Feedback (RLHF)?",
+                "back": "A technique where human rankings of model outputs are used to 'fine-tune' the LLM to be more helpful, safe, and aligned with human intent."
+            },
+            {
+                "front": "What is an LLM hallucination?",
+                "back": "When a model generates text that is factually incorrect but sounds confident and linguistically plausible."
+            },
+            {
+                "front": "What is Quantization?",
+                "back": "Reducing the precision of model weights (e.g., from 16-bit to 4-bit) to make the model smaller and faster with minimal loss in accuracy."
+            },
+            {
+                "front": "What are LoRA and PEFT?",
+                "back": "Parameter-Efficient Fine-Tuning (PEFT) methods, like LoRA, that allow you to fine-tune a model by only changing a tiny fraction of its weights, saving massive amounts of compute."
+            },
+            {
+                "front": "What is a Model Registry?",
+                "back": "A central hub (like a 'version control' for models) used to store, version, and manage the lineage of trained ML models."
+            },
+            {
+                "front": "What is a Feature Store?",
+                "back": "A centralized repository that stores and serves standardized features for both training and real-time inference, preventing training-serving skew."
+            },
+            {
+                "front": "What is Data Drift?",
+                "back": "When the statistical properties of the incoming production data change over time, making the original trained model less effective."
+            },
+            {
+                "front": "What is Inference Latency?",
+                "back": "The time it takes for a model to produce a prediction or response after receiving an input (crucial for real-time apps)."
+            },
+            {
+                "front": "What is the difference between Data Drift and Model Drift?",
+                "back": "Data Drift: The input data changes (e.g., user behavior shifts).\nModel Drift: The model's predictive power decays because the world changed (e.g., a stock market model after a crash)."
+            },
+            {
+                "front": "How do tokens work in an LLM?",
+                "back": "Tokens act as the bridge between text and numbers. The model converts raw text into numerical IDs, processes them using mathematical weights to predict the next ID, and finally decodes those IDs back into human-readable text."
+            },
+            {
+                "front": "What is the relationship between tokens and words in LLMs?",
+                "back": "Tokens are not always whole words. While common words may be a single token, complex or rare words are broken into 'sub-words.' A helpful rule of thumb is that 1,000 tokens typically represent about 750 words."
+            },
+            {
+                "front": "What is Training-Serving Skew?",
+                "back": "A discrepancy that happens when the features passed to the model are computed differently at training and inference time, leading to inconsistent model performance."
+            },
+            {
+                "front": "What are Features?",
+                "back": "The individual, measurable variables or characteristics (inputs) used to train a model and make predictions (e.g., the words in a prompt or the price of a house)."
+            },
+            {
+                "front": "What is the problem with requiring a client to transmit a full user state (e.g., history, age, gender) for real-time recommendations?",
+                "back": "It creates tight coupling between the client and the model service, increases potential for errors, and forces the client to know how to access/compute features, which is an MLOps antipattern."
+            },
+            {
+                "front": "Why should an LLM with RAG support use a Vector DB instead of having the client pass document context directly?",
+                "back": "Passing context via the client requires the application to know how to query and retrieve documents (external state). This is not feasible and violates the principle that clients should not handle feature retrieval or computation."
+            },
+            {
+                "front": "What is the FTI (Feature, Training, Inference) pipeline architecture?",
+                "back": "A modular MLOps architecture that decouples ML systems into three independent pipelines: the Feature Pipeline (data transformation), the Training Pipeline (model creation), and the Inference Pipeline (prediction delivery)."
+            },
+            {
+                "front": "What is the role of the Feature Pipeline (#1) in the FTI architecture?",
+                "back": "It ingests raw data and transforms it into 'Features and Labels' using tools like Pandas, Spark, or DBT. These processed features are then stored in the Feature Store."
+            },
+            {
+                "front": "What is the role of the Training Pipeline (#2) in the FTI architecture?",
+                "back": "It retrieves processed features/labels from the Feature Store to train ML models (using frameworks like PyTorch or Scikit-Learn) and then saves the completed models into the Model Registry."
+            },
+            {
+                "front": "What is the role of the Inference Pipeline (#3) in the FTI architecture?",
+                "back": "It takes new features from the Feature Store and the trained model from the Model Registry to generate predictions for the end-user or client application."
+            },
+            {
+                "front": "How do the Feature Store and Model Registry act as 'connectors' in the FTI architecture?",
+                "back": "The Feature Store shares data between all three pipelines to ensure consistency (preventing skew), while the Model Registry acts as the hand-off point between Training and Inference."
+            },
+            {
+                "front": "What does the feature pipeline take as input, and what does it output?",
+                "back": "It takes raw data as input, processes it, and outputs the features and labels required by the model for training or inference."
+            },
+            {
+                "front": "Where are features and labels stored instead of being passed directly to the model?",
+                "back": "They are stored inside a feature store."
+            },
+            {
+                "front": "What is the primary responsibility of a feature store?",
+                "back": "To store, version, track, and share features, maintaining a constant state of the features for training and inference pipelines."
+            },
+            {
+                "front": "How does using a feature store help avoid the training-serving skew problem?",
+                "back": "By versioning the data, it ensures that the exact same features are used at training time and inference time."
+            },
+            {
+                "front": "What are the inputs and outputs of the training pipeline?",
+                "back": "Input: features and labels from the feature store. Output: a trained model or models."
+            },
+            {
+                "front": "What is the role of a model registry?",
+                "back": "To store, version, track, and share trained models with the inference pipeline, treating the model as a first-class citizen."
+            },
+            {
+                "front": "Why do modern model registries include a metadata store?",
+                "back": "To track essential aspects of how the model was trained, most importantly the specific features, labels, and versions used."
+            },
+            {
+                "front": "What inputs does the inference pipeline need to generate predictions?",
+                "back": "It requires features and labels from the feature store, and the trained model from the model registry."
+            },
+            {
+                "front": "How are predictions handled differently in batch systems versus real-time systems?",
+                "back": "In a batch system, predictions are typically stored in a database. In a real-time system, they are served immediately to the requesting client."
+            },
+            {
+                "front": "How does versioning models and features make deployment easier?",
+                "back": "It allows for easy upgrades or rollbacks because you always know exactly which feature versions are compatible with specific model versions."
+            },
+            {
+                "front": "What are the benefits of FTI architecture?",
+                "back": "The most important thing you must remember about the FTI pipelines is their interface:\n• The feature pipeline takes in data and outputs the features and labels saved to the feature store.\n• The training pipeline queries the features store for features and labels and outputs a model to the model registry.\n• The inference pipeline uses the features from the feature store and the model from the model registry to make predictions."
+            },
+            {
+                "front": "How would you design an end-to-end LLM Twin architecture, specifically detailing the Data Collection, Feature, Training, and Inference pipelines based on the standard high-level design?",
+                "back": "https://gemini.google.com/app/d8a10c6bc344188d?hl=pl"
+            },
+            {
+                "front": "What is RAG, what does it stand for, and how does it work in practice?",
+                "back": "RAG stands for Retrieval-Augmented Generation. It is a technique that gives LLMs access to specific, external data without retraining them.\n\n**How it works:**\n1. **Retrieve:** When a user asks a question, the system searches a knowledge base (like a vector database) for relevant documents.\n2. **Augment:** Those documents are added to the user's original prompt as context.\n3. **Generate:** The LLM reads the query + the context to produce a factually grounded response, reducing hallucinations."
+            },
+            {
+                "front": "How does a Vector Database differ from a traditional Relational Database (RDBMS)?",
+                "back": "Traditional databases use exact keyword matches and structured rows/columns. Vector databases use mathematical similarity between high-dimensional embeddings, allowing them to search for 'meaning' or 'intent' rather than just literal characters."
+            },
+            {
+                "front": "What is an Index in a Vector Database and why is it used?",
+                "back": "An Index is a data structure (like HNSW or IVF) that organizes embeddings to enable **Approximate Nearest Neighbors (ANN)** search. It is used to avoid 'brute force' calculations, allowing the database to search millions of vectors in milliseconds by trading a small amount of accuracy for massive speed."
+            },
+            {
+                "front": "What is a Vector Index and how does it compare to a standard database index?",
+                "back": "A Vector Index is a complex mathematical structure that organizes high-dimensional vectors. While a standard index (like an alphabetical list) helps find exact matches, a vector index allows the database to find similar items without searching every single entry."
+            },
+            {
+                "front": "What is the 'Brute Force' problem in vector search (kNN)?",
+                "back": "k-Nearest Neighbors (kNN) is a search method that calculates the distance between a query and every single vector in the database. While 100% accurate, it becomes incredibly slow as the dataset grows (e.g., searching 10 million points)."
+            },
+            {
+                "front": "What is Approximate Nearest Neighbors (ANN) and what is its primary trade-off?",
+                "back": "ANN is a search optimization used by indexes to find similar vectors quickly. Its primary trade-off is **accuracy for speed**: it searches much faster than kNN but may occasionally miss the absolute closest match."
+            },
+            {
+                "front": "How does an Inverted File Index (IVF) work?",
+                "back": "IVF divides the vector space into clusters or 'buckets.' When a search is performed, the system identifies which bucket the query belongs to and only searches the vectors within that specific cluster and its neighbors."
+            },
+            {
+                "front": "How does Hierarchical Navigable Small World (HNSW) organize data?",
+                "back": "HNSW creates a multi-layered graph. The top layers contain fewer points (like a high-level overview map), while the bottom layers contain all points (like a detailed street map). Search starts at the top and 'zooms in' to the relevant neighborhood quickly."
+            },
+            {
+                "front": "Which vector indexing strategy is currently considered the 'gold standard' for performance?",
+                "back": "Hierarchical Navigable Small World (HNSW)."
+            }
+        ]
+    }
+]
