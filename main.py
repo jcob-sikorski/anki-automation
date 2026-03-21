@@ -4,10 +4,14 @@ import os
 import questionary
 
 ANKI_CONNECT_URL = "http://localhost:8765"
-DECK_NAME = "Time Units"
+DECK_NAME = "GraphQL/REST"
 MODEL_NAME = "Basic"
 JSON_FOLDER = "json"
-TAGS = ["system-design", "estimation", "time-units"]
+TAGS = [
+      "system-design",
+      "graphql",
+      "rest"
+    ]
 
 
 def add_note(front, back, tags=None):

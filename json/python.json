@@ -1,0 +1,269 @@
+[
+    {
+        "tags": [
+            "python"
+        ],
+        "cards": [
+            {
+                "front": "Explain what is Python Data Model",
+                "back": "The Python Data Model is the API that describes the building blocks of the language (like objects, iterables, and functions). It defines how objects should interact with language syntax, such as iteration, collections, and attribute access, by implementing specific methods."
+            },
+            {
+                "front": "Explain what are special methods in Python. What invokes them? What they do?",
+                "back": "Special methods (dunder methods) are methods with names like `__getitem__`. They are invoked by the Python interpreter to perform basic operations, usually triggered by special syntax (e.g., `a + b` invokes `__add__`). They allow custom objects to leverage core language features and behave like built-in types."
+            },
+            {
+                "front": "In Python, why is it generally preferred to use a built-in function (like len()) instead of calling a special method directly (like .__len__())?",
+                "back": "1. Speed: Built-in functions are often faster than method calls for built-in types.\n\n2. Extra Services: Built-ins can provide additional logic or error handling beyond the raw method call.\n\n3. The Rule of Thumb: You should implement special methods frequently, but invoke them rarely.\n\nNote: The only special method frequently called directly by user code is __init__ (specifically when invoking a superclass initializer)."
+            },
+            {
+                "front": "What is composition?",
+                "back": ""
+            },
+            {
+                "front": "How does Python determine the truthiness of a user-defined class instance when bool(x) is called? Explain the fallback logic.",
+                "back": "By default, instances are truthy unless __bool__ or __len__ is implemented.\n\nLogic Flow:\n1. Python tries x.__bool__().\n2. If __bool__ is missing, it tries x.__len__(). If this returns 0, bool(x) is False.\n3. If neither exists, the result defaults to True."
+            },
+            {
+                "front": "What are the three fundamental interfaces unified by the Collection ABC, and which special method does each represent?",
+                "back": "1. Iterable: __iter__ (for, unpacking)\n2. Sized: __len__ (len() function)\n3. Container: __contains__ (in operator)"
+            },
+            {
+                "front": "Name the three major specializations of the Collection ABC and provide a built-in example for each.",
+                "back": "1. Sequence: list, str\n2. Mapping: dict\n3. Set: set, frozenset"
+            },
+            {
+                "front": "Does a Python class need to explicitly inherit from Sized to be considered 'Sized'?",
+                "back": "No. Due to Python's data model, simply implementing __len__ satisfies the Sized interface."
+            },
+            {
+                "front": "__repr__",
+                "back": "Official string representation for developers; used by repr() and the interactive console."
+            },
+            {
+                "front": "__str__",
+                "back": "Informal/user-friendly string representation; used by str() and print()."
+            },
+            {
+                "front": "__format__",
+                "back": "Used by f-strings and format() to provide custom formatting logic."
+            },
+            {
+                "front": "__bytes__",
+                "back": "Used by bytes() to compute a byte-string representation."
+            },
+            {
+                "front": "__fspath__",
+                "back": "Used by os.fspath() to represent objects as file system paths."
+            },
+            {
+                "front": "__bool__",
+                "back": "Used for truth value testing; returns True or False."
+            },
+            {
+                "front": "__complex__",
+                "back": "Used by complex() to convert an object to a complex number."
+            },
+            {
+                "front": "__int__",
+                "back": "Used by int() to convert an object to an integer."
+            },
+            {
+                "front": "__float__",
+                "back": "Used by float() to convert an object to a float."
+            },
+            {
+                "front": "__hash__",
+                "back": "Used by hash() and to make objects usable as keys in a dict or elements in a set."
+            },
+            {
+                "front": "__index__",
+                "back": "Used when an object is used as an integer index (e.g., in slicing or bin())."
+            },
+            {
+                "front": "__len__",
+                "back": "Used by len() to get the size of the collection."
+            },
+            {
+                "front": "__getitem__",
+                "back": "Used for reading values: obj[key]."
+            },
+            {
+                "front": "__setitem__",
+                "back": "Used for setting values: obj[key] = value."
+            },
+            {
+                "front": "__delitem__",
+                "back": "Used for deleting values: del obj[key]."
+            },
+            {
+                "front": "__contains__",
+                "back": "Used for membership testing: value in obj."
+            },
+            {
+                "front": "__iter__",
+                "back": "Returns an iterator for the object."
+            },
+            {
+                "front": "__aiter__",
+                "back": "Returns an asynchronous iterator (for 'async for')."
+            },
+            {
+                "front": "__next__",
+                "back": "Returns the next item from an iterator."
+            },
+            {
+                "front": "__anext__",
+                "back": "Returns the next item from an asynchronous iterator."
+            },
+            {
+                "front": "__reversed__",
+                "back": "Used by reversed() to iterate in reverse order."
+            },
+            {
+                "front": "__call__",
+                "back": "Allows an instance to be called like a function: obj()."
+            },
+            {
+                "front": "__await__",
+                "back": "Makes an object awaitable; used by the 'await' keyword."
+            },
+            {
+                "front": "__enter__",
+                "back": "Executed at the start of a 'with' block."
+            },
+            {
+                "front": "__exit__",
+                "back": "Executed at the end of a 'with' block (handles cleanup/errors)."
+            },
+            {
+                "front": "__aenter__",
+                "back": "The asynchronous version of __enter__."
+            },
+            {
+                "front": "__aexit__",
+                "back": "The asynchronous version of __exit__."
+            },
+            {
+                "front": "__new__",
+                "back": "The actual creator of the instance; called before __init__."
+            },
+            {
+                "front": "__init__",
+                "back": "Initializes the instance after it has been created."
+            },
+            {
+                "front": "__del__",
+                "back": "The 'finalizer'; called when the instance is about to be destroyed (garbage collected)."
+            },
+            {
+                "front": "__getattr__",
+                "back": "Called only if the attribute was not found by normal means."
+            },
+            {
+                "front": "__getattribute__",
+                "back": "Called unconditionally for every attribute access."
+            },
+            {
+                "front": "__setattr__",
+                "back": "Called when attempting to set an attribute: obj.attr = value."
+            },
+            {
+                "front": "__delattr__",
+                "back": "Called when attempting to delete an attribute: del obj.attr."
+            },
+            {
+                "front": "__dir__",
+                "back": "Used by dir() to list the attributes of an object."
+            },
+            {
+                "front": "__get__",
+                "back": "Used in a descriptor to retrieve the value from a managed class attribute."
+            },
+            {
+                "front": "__set__",
+                "back": "Used in a descriptor to set the value on a managed class attribute."
+            },
+            {
+                "front": "__delete__",
+                "back": "Used in a descriptor to delete a managed class attribute."
+            },
+            {
+                "front": "__set_name__",
+                "back": "Called at class creation time to give the descriptor the name it was assigned to."
+            },
+            {
+                "front": "__instancecheck__",
+                "back": "Customizes the behavior of isinstance(instance, class)."
+            },
+            {
+                "front": "__subclasscheck__",
+                "back": "Customizes the behavior of issubclass(subclass, class)."
+            },
+            {
+                "front": "__prepare__",
+                "back": "Creates the namespace dictionary for a class before its body is executed."
+            },
+            {
+                "front": "__init_subclass__",
+                "back": "Called whenever the containing class is subclassed."
+            },
+            {
+                "front": "__class_getitem__",
+                "back": "Enables generic type syntax on classes: Class[Type]."
+            },
+            {
+                "front": "__mro_entries__",
+                "back": "Used to resolve base classes when they aren't standard classes (metaprogramming)."
+            },
+            {
+                "front": "How does len(x) work differently for built-in types vs. custom objects in CPython? Why is it so fast for built-ins?",
+                "back": "1. Built-in types: Extremely fast because CPython reads the length directly from a field in a C struct (no method call).\n2. Custom objects: Python calls the __len__ special method.\n3. Logic: This 'special treatment' provides a compromise between high-performance core collections and language-wide consistency."
+            },
+            {
+                "front": "What are Container sequences in Python, and how do they store items?",
+                "back": "Container sequences (e.g., list, tuple, deque) can hold different types. They store REFERENCES to objects rather than the objects themselves."
+            },
+            {
+                "front": "What are Flat sequences in Python, and how do they store items?",
+                "back": "Flat sequences (e.g., str, bytes, array.array) hold one simple type. They store VALUES directly in their own memory space as a contiguous block."
+            },
+            {
+                "front": "What is the key memory difference between a list and an array.array?",
+                "back": "A list stores pointers to distinct Python objects (higher overhead). An array stores raw values in a single memory space (compact and efficient)."
+            },
+            {
+                "front": "What are the two standard metadata fields in every CPython object header?",
+                "back": "1. ob_refcnt: The object’s reference count.\n2. ob_type: A pointer to the object’s type."
+            },
+            {
+                "front": "What is the memory structure of a Python float on a 64-bit build?",
+                "back": "It contains three 8-byte fields: ob_refcnt (metadata), ob_type (metadata), and ob_fval (the actual C double value). Total: 24 bytes."
+            },
+            {
+                "front": "Why is an array of floats more compact than a tuple of floats?",
+                "back": "An array is one object holding raw values. A tuple is a collection of pointers to separate float objects, each carrying its own 16-byte metadata header."
+            },
+            {
+                "front": "What is the primary difference between a Mutable and an Immutable sequence in Python?",
+                "back": "Mutable sequences allow in-place modification (adding/removing/updating items). Immutable sequences cannot be changed after creation; any 'modification' creates a new object."
+            },
+            {
+                "front": "Classify these sequences as Mutable or Immutable: list, tuple, str, bytes, bytearray, array.array, deque.",
+                "back": "Mutable: list, bytearray, array.array, collections.deque.\nImmutable: tuple, str, bytes."
+            },
+            {
+                "front": "Define the roles of map and filter and their list comprehension equivalent.",
+                "back": "map: Applies a function to every item.\nfilter: Selects items based on a condition.\nEquivalent: [f(x) for x in iterable if condition(x)] performs both in one expression."
+            },
+            {
+                "front": "Why are list comprehensions often preferred over map/filter compositions?",
+                "back": "1. Readability: They avoid the 'contortions' of lambda functions.\n2. Performance: They are generally as fast as or faster than map/filter equivalents."
+            },
+            {
+                "front": "What is a Generator Expression (genexp) and why is it preferred over a listcomp for initializing other sequences?",
+                "back": "1. Memory: It yields items one by one (iterator protocol) instead of building a full list in memory.\n2. Syntax: Uses parentheses () instead of brackets [].\n3. Use Case: Efficiently feeds constructors (like tuple, array, or sum) without an intermediate list object."
+            }
+        ]
+    }
+]

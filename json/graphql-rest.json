@@ -1,0 +1,87 @@
+[
+  {
+    "tags": [
+      "system-design",
+      "graphql",
+      "rest"
+    ],
+    "cards": [
+        {
+            "front": "What does the acronym REST stand for, and what is it?",
+            "back": "REST stands for REpresentational State Transfer. It is an architectural style for designing distributed hypermedia systems, commonly used to build web services."
+        },
+        {
+            "front": "What type of applications are best suited for a REST architecture?",
+            "back": "REST is ideal for simple, CRUD-heavy APIs (like e-commerce backends), public APIs where predictability is key, systems that rely heavily on HTTP caching (via CDNs), and teams needing a battle-tested, beginner-friendly approach."
+        },
+        {
+            "front": "Which primary protocols does REST use?",
+            "back": "REST almost exclusively relies on HTTP (Hypertext Transfer Protocol) and uses its standard methods, status codes, and headers to manage communication between client and server."
+        },
+        {
+            "front": "How does REST define and handle a 'resource'?",
+            "back": "In REST, data is treated as resources. Each resource is identified by a unique URL (an endpoint). Operations on these resources are performed using standard HTTP methods."
+        },
+        {
+            "front": "Explain the concept of statelessness in REST.",
+            "back": "REST is inherently stateless. Every request from the client must contain all the information the server needs to process it (e.g., JWT tokens in headers). The server does not store client context between requests, which simplifies server design and makes horizontal scaling much easier."
+        },
+        {
+            "front": "What are the four primary HTTP methods used in REST, and what actions do they perform?",
+            "back": "1. GET: Retrieve data. 2. POST: Create new resources. 3. PUT/PATCH: Update resources (PUT replaces the whole resource; PATCH updates it partially). 4. DELETE: Remove resources."
+        },
+        {
+            "front": "Explain the three main categories of HTTP status codes used in REST.",
+            "back": "1. 2xx (Success): Indicates the request worked (e.g., 200 OK, 201 Created). 2. 4xx (Client Errors): Indicates the client made a mistake (e.g., 400 Bad Request, 404 Not Found). 3. 5xx (Server Errors): Indicates the server failed (e.g., 500 Internal Server Error)."
+        },
+        {
+            "front": "Why is versioning important in REST, and how is it typically implemented?",
+            "back": "Versioning allows APIs to evolve without breaking existing clients. It is commonly implemented in the URL (e.g., /v1/users), via custom headers, or using query parameters. URL versioning is the most popular due to its simplicity."
+        },
+        {
+            "front": "Describe a typical client-server flow in a REST API.",
+            "back": "The client sends an HTTP request to an endpoint (e.g., GET /api/v1/products) along with necessary headers (like auth). The server validates the request, queries the database, and returns an HTTP status code along with a payload, typically a JSON array or object."
+        },
+        {
+            "front": "How does the endpoint structure of GraphQL differ from REST?",
+            "back": "Unlike REST, which uses multiple endpoints for different resources, GraphQL uses a single endpoint (typically /graphql) for all operations."
+        },
+        {
+            "front": "What is the role of the schema in GraphQL?",
+            "back": "The schema acts as a strict contract between the client and server. It defines the available data types, fields, and their relationships, allowing the server to resolve data exactly as specified."
+        },
+        {
+            "front": "How do clients interact with GraphQL's single endpoint?",
+            "back": "Clients send POST requests to the single URL with a JSON body containing a specific query. The server parses this query and returns exactly the fields requested, avoiding unnecessary data transfer."
+        },
+        {
+            "front": "What features provide 'query flexibility' in GraphQL?",
+            "back": "Clients define the exact response structure. They can nest related data (e.g., users and their posts) in one query. GraphQL also uses 'Mutations' for updating data and 'Subscriptions' via WebSockets for real-time updates."
+        },
+        {
+            "front": "Define over-fetching and under-fetching, and explain how GraphQL solves them.",
+            "back": "Over-fetching is downloading more data than needed; under-fetching is requiring multiple API calls to get related data. GraphQL solves both by allowing the client to request precisely the nested data and fields it needs in a single network call."
+        },
+        {
+            "front": "What is the N+1 Problem in GraphQL, and how is it mitigated?",
+            "back": "The N+1 problem occurs when fetching a list of items triggers one initial database query, plus N additional queries for related data (e.g., 1 query for 10 users, 10 queries for their posts). It is mitigated using batching and caching tools like DataLoader."
+        },
+        {
+            "front": "When should you choose GraphQL over REST?",
+            "back": "Use GraphQL when data requirements vary heavily by client (e.g., web vs. mobile), when handling complex nested data, when rapid iteration is needed without changing the server schema, or when real-time features (subscriptions) are required."
+        },
+        {
+            "front": "What are the core technical trade-offs between REST and GraphQL regarding complexity and caching?",
+            "back": "REST features simple server logic and leverages built-in HTTP caching perfectly, but suffers from endpoint bloat and rigid response shapes. GraphQL empowers clients with precise data fetching, but shifts complexity to the server (requiring custom rate-limiting, depth limits) and cannot easily use standard HTTP caching."
+        },
+        {
+            "front": "Compare REST and GraphQL in terms of Scalability and Performance.",
+            "back": "Scalability: REST scales easily via statelessness and standard load balancing. GraphQL is scalable but requires careful design (like federated schemas) to prevent resolver bottlenecks. Performance: REST leverages edge caching well but can waste bandwidth. GraphQL optimizes network calls and bandwidth but can be slowed down by complex resolver parsing and the N+1 problem."
+        },
+        {
+            "front": "Compare REST and GraphQL in terms of Availability and Cost.",
+            "back": "Availability: Both achieve high availability; REST has simpler failover, while GraphQL's single endpoint requires robust circuit breakers. Cost: REST has lower operational costs and server load. GraphQL requires more CPU/memory to parse queries (higher upfront cost) but saves money on bandwidth/egress fees and boosts developer productivity."
+        }
+        ]
+  }
+]
