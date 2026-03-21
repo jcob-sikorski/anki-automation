@@ -263,6 +263,46 @@
             {
                 "front": "What is a Generator Expression (genexp) and why is it preferred over a listcomp for initializing other sequences?",
                 "back": "1. Memory: It yields items one by one (iterator protocol) instead of building a full list in memory.\n2. Syntax: Uses parentheses () instead of brackets [].\n3. Use Case: Efficiently feeds constructors (like tuple, array, or sum) without an intermediate list object."
+            },
+            {
+                "front": "What are the two 'roles' that tuples play in the Python Data Model?",
+                "back": "1. Immutable Lists: Constant sequences where items are often homogeneous.\n2. Records: Collections of fields where position defines meaning."
+            },
+            {
+                "front": "Why is the order of items critical when using a tuple as a record?",
+                "back": "Meaning is tied to position (semantics). Sorting a record (like coordinates) destroys the information because the fields no longer align with their intended definitions."
+            },
+            {
+                "front": "What is the difference between using '_' as a dummy variable vs. using it in a match/case statement?",
+                "back": "1. Standard Code: It is a naming convention for ignored values. It is a valid variable and IS bound to a value.\n2. match/case: It is a special wildcard. It matches anything but is NOT bound to a value (cannot be referenced)."
+            },
+            {
+                "front": "What are the two key benefits of using a tuple instead of a list for constant sequences?",
+                "back": "1. Clarity: Signals that the length/identities will not change.\n2. Performance: Uses less memory and allows for interpreter optimizations."
+            },
+            {
+                "front": "Does tuple immutability protect the values of the objects inside it?",
+                "back": "No. It only protects the REFERENCES. You cannot replace or delete the references, but if they point to mutable objects (like a list), those objects can still be modified."
+            },
+            {
+                "front": "Can a tuple's value change after creation?",
+                "back": "Yes, if it contains mutable objects. Modifying a list inside a tuple changes the tuple's value, even though the reference to that list remains the same."
+            },
+            {
+                "front": "What are the advantages of unpacking over index-based extraction?",
+                "back": "1. Clarity: Avoids error-prone indexing. 2. Flexibility: Works with all iterables (like iterators) that don't support index notation []."
+            },
+            {
+                "front": "How does 'a, b = b, a' work in Python?",
+                "back": "It uses unpacking. A tuple (b, a) is built in memory and then its values are assigned to the variables a and b in parallel."
+            },
+            {
+                "front": "How do the + and * operators affect sequence objects in memory?",
+                "back": "Both operators always create a NEW object and never modify the original operands. + joins two sequences of the same type; * repeats a sequence by an integer."
+            },
+            {
+                "front": "What is the requirement for the operands when using the + operator on sequences?",
+                "back": "Both operands must usually be of the same sequence type (e.g., list + list)."
             }
         ]
     }
